@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Practo Clone - Medical Consultancy Platform 🏥
 
-## Getting Started
+A full-stack medical consultancy platform inspired by Practo, built for Sprint 1.
 
-First, run the development server:
+## 👥 The Team
+- **Kavish (Lead)**: Architecture, Integration, DevOps (GitHub Actions), and Global Layouts.
+- **Joel Joy**: Patient-side UI, Browsing, Booking form, and Validation.
+- **Harjodh Singh**: Doctor-side APIs, Prisma Schema, Slot Generation, and Dashboard.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Tech Stack
+- **Frontend/Backend**: Next.js (App Router, React 19)
+- **Database**: PostgreSQL
+- **ORM**: Prisma
+- **CI/CD**: GitHub Actions (Configured in `.github/workflows/ci.yml`)
+- **Cloud/Hosting**: Google Cloud Platform (GCP)
+- **Styling**: Tailwind CSS & Glassmorphism UI
+- **Validation**: Zod + React Hook Form
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🎯 Sprint 1 MVP Scope
+The Sprint 1 MVP is hyper-focused on **appointment scheduling** without double-booking.
+- Patients can browse doctors and book 30-minute time slots.
+- Doctors can manage their profile and view their dashboard.
+- **Double-booking is physically prevented** at the database level using a unique constraint `@@unique([doctorId, startTime])`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 💻 Getting Started for Developers
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/kavish2705-coder/Kavish_Practo_Kalvium-Community.git
+   cd Kavish_Practo_Kalvium-Community
+   ```
 
-## Learn More
+2. **Install Dependencies:**
+   ```bash
+   npm install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+3. **Set up Environment Variables:**
+   Create a `.env` file in the root directory (use `.env.example` as a template).
+   ```bash
+   DATABASE_URL="postgresql://user:password@localhost:5432/practo_db"
+   NEXTAUTH_SECRET="your_secret_here"
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. **Initialize Database:**
+   Sync the Prisma schema to your PostgreSQL instance:
+   ```bash
+   npx prisma db push
+   ```
+   Generate the Prisma Client types:
+   ```bash
+   npx prisma generate
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+5. **Run the Development Server:**
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000) in your browser to see the Landing Page.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🌿 Git Workflow
+- `master` is the main branch and is protected by GitHub Actions.
+- Create feature branches for your tasks:
+  - Joel: `git checkout -b feature/patient-booking`
+  - Harjodh: `git checkout -b feature/doctor-dashboard`
+- Open a Pull Request for Kavish to review. Merging requires the CI pipeline (TypeScript, ESLint) to pass!
