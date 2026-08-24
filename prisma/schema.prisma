@@ -1,0 +1,78 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  PATIENT
+  DOCTOR
+}
+
+enum AppointmentStatus {
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  passwordHash  String
+  name          String
+  role          Role
+  createdAt     DateTime  @default(now())
+
+  doctorProfile DoctorProfile?
+  appointmentsAsPatient Appointment[] @relation("PatientAppointments")
+  appointmentsAsDoctor  Appointment[] @relation("DoctorAppointments")
+}
+
+model DoctorProfile {
+  id             String   @id @default(uuid())
+  userId         String   @unique
+  specialization String
+  qualification  String
+  experience     Int      // in years
+  fee            Float
+  clinicInfo     String
+  
+  user           User     @relation(fields: [userId], references: [id])
+  schedules      Schedule[]
+}
+
+model Schedule {
+  id               String   @id @default(uuid())
+  doctorId         String
+  dayOfWeek        Int      // 0 = Sunday, 1 = Monday, etc.
+  startTime        String   // "10:00"
+  endTime          String   // "13:00"
+  slotDurationMins Int      // 30
+  
+  doctor           DoctorProfile @relation(fields: [doctorId], references: [id])
+  
+  @@unique([doctorId, dayOfWeek])
+}
+
+model Appointment {
+  id          String   @id @default(uuid())
+  patientId   String
+  doctorId    String
+  startTime   DateTime
+  endTime     DateTime
+  status      AppointmentStatus @default(CONFIRMED)
+  patientNotes String?
+  createdAt   DateTime @default(now())
+
+  patient     User     @relation("PatientAppointments", fields: [patientId], references: [id])
+  doctor      User     @relation("DoctorAppointments", fields: [doctorId], references: [id])
+
+  // CRITICAL: Double-booking prevention at the database level.
+  @@unique([doctorId, startTime])
+}
