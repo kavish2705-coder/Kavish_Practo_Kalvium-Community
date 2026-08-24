@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Search, Calendar, Activity, CheckCircle2 } from "lucide-react";
 
@@ -59,12 +58,9 @@ export default function Home() {
 
             <div className="relative mx-auto w-full max-w-[500px] lg:max-w-none">
               <div className="aspect-square md:aspect-[4/3] lg:aspect-square relative rounded-3xl overflow-hidden shadow-2xl ring-1 ring-slate-900/10 bg-slate-200">
-                {/* We will replace this image URL with the generated one */}
-                <img 
-                  src="/hero-image.png" 
-                  alt="Modern Clinic" 
-                  className="object-cover w-full h-full"
-                />
+                <div className="w-full h-full bg-gradient-to-tr from-slate-200 to-slate-300 flex items-center justify-center">
+                  <span className="text-slate-400 font-medium">Hero Image Graphic</span>
+                </div>
               </div>
               
               {/* Floating Badge */}

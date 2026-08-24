@@ -1,6 +1,6 @@
-import { Role, AppointmentStatus } from '@prisma/client';
+import { Role } from '@prisma/client';
 
-export type ApiResponse<T = any> = {
+export type ApiResponse<T = unknown> = {
   success: boolean;
   data?: T;
   error?: string;
