@@ -7,7 +7,7 @@ export default function Navbar() {
       <div className="container mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 drop-shadow-sm">
           {/* A simple placeholder logo, or an icon */}
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-secondary-500 to-blue-500 flex items-center justify-center text-white font-bold text-lg shadow-md">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-secondary-500 to-secondary-600 flex items-center justify-center text-white font-bold text-lg shadow-md">
             P
           </div>
           <span className="font-extrabold text-xl hidden sm:inline-block text-slate-900">PractoClone</span>
