@@ -21,7 +21,7 @@ export default function Home() {
         {/* The smooth blur gradient overlay on the right side */}
         {/* We use mask-image to fade the backdrop-blur so the left side is perfectly clear and the right side is blurred/frosted */}
         <div 
-          className="absolute inset-0 z-10 bg-gradient-to-r from-transparent via-white/50 to-white/95 backdrop-blur-md"
+          className="absolute inset-0 z-10 bg-gradient-to-r from-transparent via-white/50 to-white/95 backdrop-blur-md animate-slow-fade-in-blur"
           style={{
             maskImage: "linear-gradient(to right, transparent 20%, black 60%)",
             WebkitMaskImage: "linear-gradient(to right, transparent 20%, black 60%)"
@@ -30,7 +30,7 @@ export default function Home() {
 
         <div className="container mx-auto px-4 md:px-6 relative z-20">
           <div className="flex justify-end">
-            <div className="max-w-2xl text-right">
+            <div className="max-w-2xl text-right animate-slow-slide-in-right">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 backdrop-blur-md border border-slate-200 text-sm font-medium text-teal-700 mb-6 shadow-sm">
                 <span className="flex h-2 w-2 rounded-full bg-teal-500 animate-pulse"></span>
                 Top-rated Doctors Available Now

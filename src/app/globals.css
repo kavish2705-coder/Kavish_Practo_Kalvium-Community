@@ -54,3 +54,32 @@ body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 }
+
+@keyframes slow-fade-in-blur {
+  0% { 
+    opacity: 0;
+  }
+  100% { 
+    opacity: 1;
+  }
+}
+
+@keyframes slow-slide-in-right {
+  0% {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slow-fade-in-blur {
+  animation: slow-fade-in-blur 2s ease-out forwards;
+}
+
+.animate-slow-slide-in-right {
+  animation: slow-slide-in-right 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+  opacity: 0;
+}
