@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import DoctorCard from "@/components/doctors/DoctorCard";
 import BookingModal from "@/components/booking/BookingModal";
@@ -48,89 +49,65 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-slate-50 text-slate-900">
-      <section className="relative overflow-hidden bg-gradient-to-br from-secondary-50/90 via-white to-slate-50 pt-16 md:pt-24 pb-20 border-b border-slate-200/60">
-        <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[500px] h-[500px] bg-secondary-200/40 rounded-full blur-3xl opacity-50 -z-10 mix-blend-multiply" />
-        <div className="absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-[500px] h-[500px] bg-secondary-100/50 rounded-full blur-3xl opacity-50 -z-10 mix-blend-multiply" />
+    <div className="flex flex-col min-h-screen">
+      {/* HERO SECTION (Our Cinematic Version) */}
+      <section className="relative min-h-[90vh] flex items-center">
+        {/* The Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image 
+            src="/hero-bg.jpg" 
+            alt="Doctor" 
+            fill 
+            className="object-cover object-left" 
+            priority 
+          />
+        </div>
 
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-            <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-secondary-50 border border-secondary-200 text-xs font-semibold text-secondary-800 mb-6 shadow-sm">
-                <span className="flex h-2 w-2 rounded-full bg-secondary-600 animate-pulse" />
-                Verified Doctors Available Now on Practo
+        {/* The smooth blur gradient overlay on the right side */}
+        <div 
+          className="absolute inset-0 z-10 bg-gradient-to-r from-transparent via-white/50 to-white/95 backdrop-blur-md animate-slow-fade-in-blur"
+          style={{
+            maskImage: "linear-gradient(to right, transparent 20%, black 60%)",
+            WebkitMaskImage: "linear-gradient(to right, transparent 20%, black 60%)"
+          }}
+        />
+
+        <div className="container mx-auto px-4 md:px-6 relative z-20">
+          <div className="flex justify-end">
+            <div className="max-w-2xl text-right animate-slow-slide-in-right">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 backdrop-blur-md border border-slate-200 text-sm font-medium text-secondary-700 mb-6 shadow-sm">
+                <span className="flex h-2 w-2 rounded-full bg-secondary-500 animate-pulse"></span>
+                Top-rated Doctors Available Now
               </div>
-
+              
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 mb-6 leading-tight">
-                Expert Healthcare,<br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary-600 to-secondary-800">
+                Expert Healthcare,<br/>
+                <span className="text-secondary-600">
                   Just a Click Away.
                 </span>
               </h1>
-
-              <p className="text-base sm:text-lg text-slate-600 mb-8 max-w-xl leading-relaxed">
-                Find top-rated specialists, check real-time slot availability, and book your appointment instantly. No waiting, no double-bookings.
+              <p className="text-lg text-slate-700 mb-8 max-w-xl ml-auto leading-relaxed">
+                Find the best doctors, view their real-time availability, and book your appointment instantly. No waiting, no double-bookings, just seamless care.
               </p>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" asChild className="h-12 px-8 text-base bg-secondary-600 text-white hover:bg-secondary-700 shadow-md">
-                  <Link href="/doctors">
-                    <Search className="mr-2 h-5 w-5" />
-                    Find a Doctor
-                  </Link>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-end">
+                <Button size="lg" className="h-12 px-8 text-base shadow-lg shadow-secondary-500/20 bg-secondary-600 hover:bg-secondary-700 text-white border-0">
+                  <Search className="mr-2 h-5 w-5" />
+                  Find a Doctor
                 </Button>
-                <Button size="lg" variant="outline" asChild className="h-12 px-8 text-base border-slate-300 bg-white/80 backdrop-blur-md text-slate-800 hover:bg-secondary-50">
-                  <Link href="#specialties">View Specialties</Link>
+                <Button size="lg" variant="outline" className="h-12 px-8 text-base bg-white/50 backdrop-blur-sm border-secondary-200 hover:bg-secondary-50">
+                  View Specialties
                 </Button>
               </div>
 
-              <div className="mt-10 flex flex-wrap items-center gap-6 text-xs sm:text-sm text-slate-600 font-medium">
+              <div className="mt-10 flex items-center justify-end gap-6 text-sm text-slate-600 font-medium">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="h-5 w-5 text-secondary-600" />
-                  <span>100% Verified Doctors</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-secondary-600" />
-                  <span>Instant Slot Booking</span>
+                  <span>Verified Doctors</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="h-5 w-5 text-secondary-600" />
-                  <span>Zero Double Bookings</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="relative mx-auto w-full max-w-[480px] lg:max-w-none">
-              <div className="glass-card p-6 sm:p-8 rounded-3xl bg-white/40 backdrop-blur-md border border-white/60 shadow-lg relative">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-14 h-14 rounded-2xl bg-secondary-600 text-white flex items-center justify-center font-bold text-xl shadow-md">
-                    P
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-slate-900 text-lg">Practo Healthcare</h3>
-                    <p className="text-xs text-secondary-700 font-semibold">Instant Online Appointments</p>
-                  </div>
-                </div>
-
-                <div className="space-y-3 mb-6">
-                  <div className="p-3.5 bg-white/90 rounded-xl border border-slate-100 flex items-center justify-between text-xs">
-                    <span className="text-slate-700 font-medium">Specialties Available</span>
-                    <span className="font-bold text-slate-900">25+ Disciplines</span>
-                  </div>
-                  <div className="p-3.5 bg-white/90 rounded-xl border border-slate-100 flex items-center justify-between text-xs">
-                    <span className="text-slate-700 font-medium">Avg Consultation Fee</span>
-                    <span className="font-bold text-slate-900">₹500 - ₹1000</span>
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-slate-200/60 flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-2 text-slate-700 font-semibold">
-                    <UserCheck className="h-4 w-4 text-secondary-600" />
-                    <span>Real-time Calendar Sync</span>
-                  </div>
-                  <Link href="/doctors" className="text-secondary-700 font-bold hover:underline inline-flex items-center gap-1">
-                    Book Now <ArrowRight className="h-3.5 w-3.5" />
-                  </Link>
+                  <span>Instant Booking</span>
                 </div>
               </div>
             </div>
@@ -138,6 +115,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* SPECIALTIES (From Joel) */}
       <section id="specialties" className="py-16 bg-white border-b border-slate-200/60">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center max-w-2xl mx-auto mb-12">
@@ -174,6 +152,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* TOP RATED DOCTORS (From Joel) */}
       <section className="py-16 bg-slate-50 border-b border-slate-200/60">
         <div className="container mx-auto px-4 md:px-6">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
@@ -204,6 +183,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* HOW IT WORKS (Perfectly Merged) */}
       <section id="how-it-works" className="py-16 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center max-w-2xl mx-auto mb-14">
@@ -213,9 +193,11 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="glass-card p-8 rounded-2xl bg-white/70 backdrop-blur-md border border-slate-200/70 text-center shadow-sm">
-              <div className="w-14 h-14 bg-secondary-100 text-secondary-700 rounded-2xl flex items-center justify-center mx-auto mb-5">
+          <div className="grid md:grid-cols-3 gap-8 relative">
+            <div className="absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-slate-200 to-transparent -translate-y-1/2 hidden md:block" />
+            
+            <div className="relative glass-card p-8 rounded-2xl bg-white/70 backdrop-blur-md border border-slate-200/70 text-center shadow-sm hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+              <div className="w-14 h-14 bg-secondary-100 text-secondary-700 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-inner">
                 <Search className="h-7 w-7" />
               </div>
               <h3 className="text-lg font-bold text-slate-900 mb-2">1. Search Doctor</h3>
@@ -224,8 +206,8 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="glass-card p-8 rounded-2xl bg-white/70 backdrop-blur-md border border-slate-200/70 text-center shadow-sm">
-              <div className="w-14 h-14 bg-secondary-100 text-secondary-700 rounded-2xl flex items-center justify-center mx-auto mb-5">
+            <div className="relative glass-card p-8 rounded-2xl bg-white/70 backdrop-blur-md border border-slate-200/70 text-center shadow-sm hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+              <div className="w-14 h-14 bg-secondary-100 text-secondary-700 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-inner">
                 <Calendar className="h-7 w-7" />
               </div>
               <h3 className="text-lg font-bold text-slate-900 mb-2">2. Choose Slot</h3>
@@ -234,8 +216,8 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="glass-card p-8 rounded-2xl bg-white/70 backdrop-blur-md border border-slate-200/70 text-center shadow-sm">
-              <div className="w-14 h-14 bg-secondary-100 text-secondary-700 rounded-2xl flex items-center justify-center mx-auto mb-5">
+            <div className="relative glass-card p-8 rounded-2xl bg-white/70 backdrop-blur-md border border-slate-200/70 text-center shadow-sm hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+              <div className="w-14 h-14 bg-secondary-100 text-secondary-700 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-inner">
                 <ShieldCheck className="h-7 w-7" />
               </div>
               <h3 className="text-lg font-bold text-slate-900 mb-2">3. Instant Confirmation</h3>

@@ -1,37 +1,36 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
-import { Stethoscope } from "lucide-react";
 
 export default function Navbar() {
   return (
-    <header className="sticky top-0 z-50 w-full glass bg-white/80 border-b border-slate-200/70 backdrop-blur-md">
+    <header className="fixed top-0 z-50 w-full bg-white/20 backdrop-blur-md border-b border-white/30">
       <div className="container mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="w-9 h-9 rounded-xl bg-secondary-600 flex items-center justify-center text-white font-bold text-lg shadow-sm group-hover:scale-105 transition-transform">
-            <Stethoscope className="h-5 w-5" />
+        <Link href="/" className="flex items-center gap-2 drop-shadow-sm group">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-secondary-500 to-secondary-600 flex items-center justify-center text-white font-bold text-lg shadow-md group-hover:scale-105 transition-transform">
+            P
           </div>
-          <span className="font-bold text-xl tracking-tight text-slate-900 group-hover:text-secondary-700 transition-colors">
-            Practo
+          <span className="font-extrabold text-xl hidden sm:inline-block text-slate-900 group-hover:text-secondary-700 transition-colors">
+            PractoClone
           </span>
         </Link>
         
-        <nav className="hidden md:flex gap-8 items-center text-sm font-semibold text-slate-700">
-          <Link href="/doctors" className="hover:text-secondary-700 transition-colors">
+        <nav className="hidden md:flex gap-6 items-center text-sm font-semibold text-slate-800">
+          <Link href="/doctors" className="hover:text-secondary-700 transition-colors drop-shadow-sm">
             Find Doctors
           </Link>
-          <Link href="/#specialties" className="hover:text-secondary-700 transition-colors">
+          <Link href="/#specialties" className="hover:text-secondary-700 transition-colors drop-shadow-sm">
             Specialties
           </Link>
-          <Link href="/#how-it-works" className="hover:text-secondary-700 transition-colors">
+          <Link href="/#how-it-works" className="hover:text-secondary-700 transition-colors drop-shadow-sm">
             How It Works
           </Link>
         </nav>
         
-        <div className="flex items-center gap-3">
-          <Button variant="ghost" size="sm" className="hidden sm:inline-flex text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+        <div className="flex items-center gap-4">
+          <Button variant="ghost" className="hidden sm:inline-flex font-bold text-slate-800 hover:bg-white/60 bg-white/30 backdrop-blur-sm border border-white/40 shadow-sm">
             Log in
           </Button>
-          <Button size="sm" asChild className="bg-secondary-600 text-white hover:bg-secondary-700 shadow-sm font-semibold">
+          <Button asChild className="font-bold shadow-lg shadow-secondary-500/30 bg-secondary-600 hover:bg-secondary-700 text-white">
             <Link href="/doctors">Book Appointment</Link>
           </Button>
         </div>
