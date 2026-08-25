@@ -13,13 +13,13 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     return (
       <div className="w-full flex flex-col gap-1.5">
         {label && (
-          <label className="text-xs font-bold uppercase tracking-wider text-white">
+          <label className="text-xs font-bold uppercase tracking-wider text-slate-700">
             {label}
           </label>
         )}
         <select
           className={cn(
-            "flex h-11 w-full rounded-xl border border-slate-700 bg-slate-800 px-3.5 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500 transition-all disabled:cursor-not-allowed disabled:opacity-50 shadow-sm cursor-pointer font-medium",
+            "flex h-11 w-full rounded-xl border border-slate-200 bg-white/90 px-3.5 py-2 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-secondary-600 focus:border-secondary-600 transition-all disabled:cursor-not-allowed disabled:opacity-50 shadow-sm cursor-pointer",
             error && "border-red-500 ring-1 ring-red-500",
             className
           )}
@@ -27,13 +27,13 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           {...props}
         >
           {options.map((opt) => (
-            <option key={opt.value} value={opt.value} className="bg-slate-800 text-white font-medium">
+            <option key={opt.value} value={opt.value} className="bg-white text-slate-900">
               {opt.label}
             </option>
           ))}
         </select>
         {error && (
-          <p className="text-xs font-semibold text-red-400">
+          <p className="text-xs font-medium text-red-500">
             {error}
           </p>
         )}
