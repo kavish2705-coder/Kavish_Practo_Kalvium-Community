@@ -4,10 +4,10 @@ import { Stethoscope } from "lucide-react";
 
 export default function Navbar() {
   return (
-    <header className="sticky top-0 z-50 w-full glass bg-white/80 border-b border-slate-200/60 backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full glass bg-white/80 border-b border-slate-200/70 backdrop-blur-md">
       <div className="container mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-secondary-500 to-secondary-700 flex items-center justify-center text-white font-bold text-lg shadow-sm group-hover:scale-105 transition-transform">
+          <div className="w-9 h-9 rounded-xl bg-secondary-600 flex items-center justify-center text-white font-bold text-lg shadow-sm group-hover:scale-105 transition-transform">
             <Stethoscope className="h-5 w-5" />
           </div>
           <span className="font-bold text-xl tracking-tight text-slate-900 group-hover:text-secondary-700 transition-colors">

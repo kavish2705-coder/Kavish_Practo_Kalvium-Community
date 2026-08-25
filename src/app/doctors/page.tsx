@@ -102,8 +102,8 @@ export default function DoctorsPage() {
         />
 
         <div className="flex items-center justify-between mb-6">
-          <p className="text-sm font-medium text-slate-600">
-            Showing <span className="font-bold text-slate-900">{filteredDoctors.length}</span> verified doctors
+          <p className="text-sm font-medium text-slate-700">
+            Showing <span className="font-semibold text-slate-900">{filteredDoctors.length}</span> verified doctors
           </p>
         </div>
 
@@ -118,7 +118,7 @@ export default function DoctorsPage() {
             ))}
           </div>
         ) : (
-          <div className="glass-card rounded-2xl p-12 text-center max-w-md mx-auto my-8 bg-white/80 backdrop-blur-md border border-white/60 shadow-lg">
+          <div className="glass-card rounded-2xl p-12 text-center max-w-md mx-auto my-8 bg-white/70 backdrop-blur-md border border-slate-200/70 shadow-md">
             <div className="w-12 h-12 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-4 border border-slate-200">
               <Frown className="h-6 w-6" />
             </div>

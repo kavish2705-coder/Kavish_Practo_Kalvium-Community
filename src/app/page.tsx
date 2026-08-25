@@ -101,7 +101,7 @@ export default function Home() {
             </div>
 
             <div className="relative mx-auto w-full max-w-[480px] lg:max-w-none">
-              <div className="glass-card p-6 sm:p-8 rounded-3xl bg-white/60 backdrop-blur-md border border-white/60 shadow-xl relative">
+              <div className="glass-card p-6 sm:p-8 rounded-3xl bg-white/40 backdrop-blur-md border border-white/60 shadow-lg relative">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-14 h-14 rounded-2xl bg-secondary-600 text-white flex items-center justify-center font-bold text-xl shadow-md">
                     P
@@ -114,11 +114,11 @@ export default function Home() {
 
                 <div className="space-y-3 mb-6">
                   <div className="p-3.5 bg-white/90 rounded-xl border border-slate-100 flex items-center justify-between text-xs">
-                    <span className="text-slate-600 font-medium">Specialties Available</span>
+                    <span className="text-slate-700 font-medium">Specialties Available</span>
                     <span className="font-bold text-slate-900">25+ Disciplines</span>
                   </div>
                   <div className="p-3.5 bg-white/90 rounded-xl border border-slate-100 flex items-center justify-between text-xs">
-                    <span className="text-slate-600 font-medium">Avg Consultation Fee</span>
+                    <span className="text-slate-700 font-medium">Avg Consultation Fee</span>
                     <span className="font-bold text-slate-900">₹500 - ₹1000</span>
                   </div>
                 </div>
@@ -157,7 +157,7 @@ export default function Home() {
               <Link
                 key={spec.id}
                 href={'/doctors?specialization=' + encodeURIComponent(spec.name)}
-                className="glass-card p-5 rounded-2xl text-center bg-white/60 backdrop-blur-md border border-slate-200/70 hover:border-secondary-300 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 group"
+                className="glass-card p-5 rounded-2xl text-center bg-white/70 backdrop-blur-md border border-slate-200/70 hover:border-secondary-200 hover:bg-secondary-50/50 hover:-translate-y-1 hover:shadow-md transition-all duration-300 group"
               >
                 <div className="w-12 h-12 bg-secondary-100 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
                   {getSpecialtyIcon(spec.iconName)}
@@ -165,7 +165,7 @@ export default function Home() {
                 <h3 className="font-bold text-slate-900 text-sm group-hover:text-secondary-700 transition-colors">
                   {spec.name}
                 </h3>
-                <p className="text-[11px] text-slate-500 mt-1">
+                <p className="text-[11px] text-slate-600 mt-1 font-medium">
                   {spec.doctorCount} Doctors
                 </p>
               </Link>
@@ -214,7 +214,7 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="glass-card p-8 rounded-2xl bg-white/60 backdrop-blur-md border border-slate-200/80 text-center shadow-sm">
+            <div className="glass-card p-8 rounded-2xl bg-white/70 backdrop-blur-md border border-slate-200/70 text-center shadow-sm">
               <div className="w-14 h-14 bg-secondary-100 text-secondary-700 rounded-2xl flex items-center justify-center mx-auto mb-5">
                 <Search className="h-7 w-7" />
               </div>
@@ -224,7 +224,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="glass-card p-8 rounded-2xl bg-white/60 backdrop-blur-md border border-slate-200/80 text-center shadow-sm">
+            <div className="glass-card p-8 rounded-2xl bg-white/70 backdrop-blur-md border border-slate-200/70 text-center shadow-sm">
               <div className="w-14 h-14 bg-secondary-100 text-secondary-700 rounded-2xl flex items-center justify-center mx-auto mb-5">
                 <Calendar className="h-7 w-7" />
               </div>
@@ -234,7 +234,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="glass-card p-8 rounded-2xl bg-white/60 backdrop-blur-md border border-slate-200/80 text-center shadow-sm">
+            <div className="glass-card p-8 rounded-2xl bg-white/70 backdrop-blur-md border border-slate-200/70 text-center shadow-sm">
               <div className="w-14 h-14 bg-secondary-100 text-secondary-700 rounded-2xl flex items-center justify-center mx-auto mb-5">
                 <ShieldCheck className="h-7 w-7" />
               </div>

@@ -31,7 +31,7 @@ export default function DoctorFilters({
   ];
 
   return (
-    <div className="glass-card rounded-2xl p-6 border border-white/60 bg-white/80 backdrop-blur-md mb-8 space-y-6 shadow-sm">
+    <div className="glass-card rounded-2xl p-6 border border-slate-200/70 bg-white/70 backdrop-blur-md mb-8 space-y-6 shadow-md">
       <div className="flex flex-col md:flex-row gap-4 items-center">
         <div className="w-full md:flex-1">
           <Input
@@ -59,7 +59,7 @@ export default function DoctorFilters({
               variant="outline"
               size="default"
               onClick={onReset}
-              className="shrink-0 text-xs gap-1.5 border-slate-300 bg-white text-slate-700 hover:bg-slate-50 font-semibold"
+              className="shrink-0 text-xs gap-1.5 border-slate-200 bg-white text-slate-700 hover:bg-slate-50 font-semibold"
             >
               <RotateCcw className="h-3.5 w-3.5 text-slate-500" />
               Reset
@@ -78,8 +78,8 @@ export default function DoctorFilters({
             className={
               "px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer " +
               (!filters.specialization
-                ? "bg-secondary-600 text-white shadow-sm shadow-secondary-600/30"
-                : "bg-white text-slate-700 hover:bg-secondary-50 hover:text-secondary-900 border border-slate-200")
+                ? "bg-secondary-600 text-white border border-secondary-600 shadow-sm"
+                : "bg-white text-slate-700 hover:bg-secondary-50 hover:border-secondary-200 hover:text-secondary-800 border border-slate-200")
             }
           >
             All Specialties
@@ -93,8 +93,8 @@ export default function DoctorFilters({
                 className={
                   "px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer " +
                   (isActive
-                    ? "bg-secondary-600 text-white shadow-sm shadow-secondary-600/30"
-                    : "bg-white text-slate-700 hover:bg-secondary-50 hover:text-secondary-900 border border-slate-200")
+                    ? "bg-secondary-600 text-white border border-secondary-600 shadow-sm"
+                    : "bg-white text-slate-700 hover:bg-secondary-50 hover:border-secondary-200 hover:text-secondary-800 border border-slate-200")
                 }
               >
                 {spec}

@@ -17,10 +17,10 @@ export default function DoctorCard({ doctor, onBook }: DoctorCardProps) {
     .substring(0, 2);
 
   return (
-    <div className="glass-card rounded-2xl p-6 border border-white/60 bg-white/80 backdrop-blur-md hover:-translate-y-1 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+    <div className="glass-card rounded-xl p-6 border border-slate-200/70 bg-white/70 backdrop-blur-md hover:-translate-y-1 hover:shadow-lg transition-all duration-300 flex flex-col justify-between group">
       <div>
         <div className="flex items-start gap-4 mb-4">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-secondary-500 to-secondary-700 flex items-center justify-center text-white font-bold text-xl shadow-md shadow-secondary-600/20 shrink-0">
+          <div className="w-14 h-14 rounded-2xl bg-secondary-600 flex items-center justify-center text-white font-bold text-xl shadow-md shrink-0">
             {initials}
           </div>
           <div className="flex-1 min-w-0">
@@ -48,16 +48,16 @@ export default function DoctorCard({ doctor, onBook }: DoctorCardProps) {
         <div className="space-y-2.5 text-xs mb-6 bg-slate-100/80 p-3.5 rounded-xl border border-slate-200/60">
           <div className="flex items-center gap-2">
             <Award className="h-4 w-4 text-secondary-600 shrink-0" />
-            <span className="font-semibold text-slate-800">{doctor.experience} Years Experience</span>
+            <span className="font-semibold text-slate-700">{doctor.experience} Years Experience</span>
           </div>
 
           <div className="flex items-start gap-2">
             <MapPin className="h-4 w-4 text-slate-500 shrink-0 mt-0.5" />
-            <span className="line-clamp-1 font-medium text-slate-700">{doctor.clinicInfo}</span>
+            <span className="line-clamp-1 font-medium text-slate-600">{doctor.clinicInfo}</span>
           </div>
 
           <div className="flex items-center justify-between pt-1 border-t border-slate-200/60">
-            <div className="flex items-center gap-1 text-slate-900 font-bold">
+            <div className="flex items-center gap-1 text-slate-900 font-semibold">
               <IndianRupee className="h-3.5 w-3.5 text-secondary-700" />
               <span>₹{doctor.fee}</span>
               <span className="text-[11px] font-normal text-slate-600">Consultation Fee</span>
@@ -76,7 +76,7 @@ export default function DoctorCard({ doctor, onBook }: DoctorCardProps) {
           variant="outline"
           size="sm"
           asChild
-          className="w-full text-xs font-semibold border-slate-300 bg-white text-slate-800 hover:bg-slate-50"
+          className="w-full text-xs font-semibold border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
         >
           <Link href={'/doctors/' + doctor.id}>View Profile</Link>
         </Button>
