@@ -64,8 +64,8 @@ export default function BookingForm({ doctor, onSuccess, onCancel }: BookingForm
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-      <div className="flex items-center gap-4 bg-secondary-50/90 p-4 rounded-2xl border border-secondary-200/80">
-        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-secondary-600 to-secondary-800 flex items-center justify-center text-white font-bold text-lg shadow-sm">
+      <div className="flex items-center gap-4 bg-secondary-50/80 p-4 rounded-2xl border border-secondary-200">
+        <div className="w-12 h-12 rounded-xl bg-secondary-600 flex items-center justify-center text-white font-bold text-lg shadow-sm">
           {doctor.name.replace("Dr. ", "").charAt(0)}
         </div>
         <div className="flex-1">

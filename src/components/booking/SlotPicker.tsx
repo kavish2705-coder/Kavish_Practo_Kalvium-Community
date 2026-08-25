@@ -118,9 +118,9 @@ export default function SlotPicker({
                         className={
                           "py-2 px-2.5 rounded-lg text-xs font-semibold transition-all text-center cursor-pointer " +
                           (isSelected
-                            ? "bg-secondary-600 text-white ring-2 ring-secondary-600 border-secondary-600 shadow-sm font-bold"
+                            ? "bg-secondary-600 text-white border-secondary-600 shadow-sm font-bold"
                             : slot.isAvailable
-                            ? "bg-white text-slate-900 border border-slate-200 hover:bg-secondary-600 hover:text-white hover:border-secondary-600"
+                            ? "bg-white text-slate-800 border border-slate-200 hover:bg-secondary-50 hover:border-secondary-300 hover:text-secondary-800"
                             : "bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed line-through opacity-60")
                         }
                       >
@@ -152,9 +152,9 @@ export default function SlotPicker({
                         className={
                           "py-2 px-2.5 rounded-lg text-xs font-semibold transition-all text-center cursor-pointer " +
                           (isSelected
-                            ? "bg-secondary-600 text-white ring-2 ring-secondary-600 border-secondary-600 shadow-sm font-bold"
+                            ? "bg-secondary-600 text-white border-secondary-600 shadow-sm font-bold"
                             : slot.isAvailable
-                            ? "bg-white text-slate-900 border border-slate-200 hover:bg-secondary-600 hover:text-white hover:border-secondary-600"
+                            ? "bg-white text-slate-800 border border-slate-200 hover:bg-secondary-50 hover:border-secondary-300 hover:text-secondary-800"
                             : "bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed line-through opacity-60")
                         }
                       >
@@ -186,9 +186,9 @@ export default function SlotPicker({
                         className={
                           "py-2 px-2.5 rounded-lg text-xs font-semibold transition-all text-center cursor-pointer " +
                           (isSelected
-                            ? "bg-secondary-600 text-white ring-2 ring-secondary-600 border-secondary-600 shadow-sm font-bold"
+                            ? "bg-secondary-600 text-white border-secondary-600 shadow-sm font-bold"
                             : slot.isAvailable
-                            ? "bg-white text-slate-900 border border-slate-200 hover:bg-secondary-600 hover:text-white hover:border-secondary-600"
+                            ? "bg-white text-slate-800 border border-slate-200 hover:bg-secondary-50 hover:border-secondary-300 hover:text-secondary-800"
                             : "bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed line-through opacity-60")
                         }
                       >

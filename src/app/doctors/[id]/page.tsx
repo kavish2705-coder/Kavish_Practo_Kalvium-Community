@@ -53,9 +53,9 @@ export default function DoctorDetailPage({ params }: PageProps) {
           Back to Doctors Catalog
         </Link>
 
-        <div className="glass-card rounded-3xl p-6 sm:p-8 border border-white/60 bg-white/80 backdrop-blur-md mb-8 shadow-md">
+        <div className="glass-card rounded-3xl p-6 sm:p-8 border border-white/60 bg-white/60 backdrop-blur-md mb-8 shadow-sm">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-secondary-600 to-secondary-800 flex items-center justify-center text-white font-bold text-3xl shadow-lg shadow-secondary-600/30 shrink-0">
+            <div className="w-20 h-20 rounded-2xl bg-secondary-600 flex items-center justify-center text-white font-bold text-3xl shadow-md shrink-0">
               {initials}
             </div>
 
@@ -78,7 +78,7 @@ export default function DoctorDetailPage({ params }: PageProps) {
                 </div>
 
                 <div className="flex items-center gap-1 text-slate-700 font-medium">
-                  <Award className="h-4 w-4 text-secondary-600" />
+                  <Award className="h-4 w-4 text-secondary-700" />
                   <span>{doctor.experience} Years Experience</span>
                 </div>
 
@@ -93,21 +93,21 @@ export default function DoctorDetailPage({ params }: PageProps) {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
-            <div className="glass-card rounded-2xl p-6 border border-white/60 bg-white/80 backdrop-blur-md shadow-sm">
-              <h3 className="text-lg font-bold text-slate-900 mb-3">About Doctor</h3>
+            <div className="glass-card rounded-2xl p-6 border border-white/60 bg-white/60 backdrop-blur-md shadow-sm">
+              <h3 className="text-lg font-semibold text-slate-900 mb-3">About Doctor</h3>
               <p className="text-sm text-slate-600 leading-relaxed">
                 {doctor.about ||
                   "Dr. " + doctor.name + " is a renowned " + doctor.specialization + " with " + doctor.experience + " years of clinical experience."}
               </p>
             </div>
 
-            <div className="glass-card rounded-2xl p-6 border border-white/60 bg-white/80 backdrop-blur-md shadow-sm">
-              <h3 className="text-lg font-bold text-slate-900 mb-3">Clinic Location</h3>
+            <div className="glass-card rounded-2xl p-6 border border-white/60 bg-white/60 backdrop-blur-md shadow-sm">
+              <h3 className="text-lg font-semibold text-slate-900 mb-3">Clinic Location</h3>
               <div className="flex items-start gap-3 text-sm text-slate-700">
-                <MapPin className="h-5 w-5 text-secondary-600 shrink-0 mt-0.5" />
+                <MapPin className="h-5 w-5 text-secondary-700 shrink-0 mt-0.5" />
                 <div>
-                  <p className="font-semibold text-slate-900">{doctor.clinicInfo}</p>
-                  <p className="text-xs text-slate-500 mt-0.5">
+                  <p className="font-medium text-slate-800">{doctor.clinicInfo}</p>
+                  <p className="text-xs text-slate-600 mt-0.5">
                     Open Mon - Sat (09:00 AM - 08:00 PM)
                   </p>
                 </div>
@@ -116,10 +116,10 @@ export default function DoctorDetailPage({ params }: PageProps) {
           </div>
 
           <div className="lg:col-span-1">
-            <div className="glass-card rounded-3xl p-6 border border-white/60 bg-white/80 backdrop-blur-md sticky top-20 shadow-xl">
+            <div className="glass-card rounded-3xl p-6 border border-white/60 bg-white/70 backdrop-blur-md sticky top-20 shadow-sm">
               <div className="mb-4">
                 <h3 className="text-xl font-bold text-slate-900">Book Appointment</h3>
-                <p className="text-xs text-slate-500 mt-0.5">
+                <p className="text-xs text-slate-600 mt-0.5">
                   Select a slot to confirm your consultation.
                 </p>
               </div>
