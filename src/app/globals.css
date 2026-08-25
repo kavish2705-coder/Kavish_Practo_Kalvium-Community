@@ -76,10 +76,10 @@ body {
 }
 
 .animate-slow-fade-in-blur {
-  animation: slow-fade-in-blur 2s ease-out forwards;
+  animation: slow-fade-in-blur 3s cubic-bezier(0.33, 1, 0.68, 1) forwards;
 }
 
 .animate-slow-slide-in-right {
-  animation: slow-slide-in-right 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+  animation: slow-slide-in-right 2.5s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
   opacity: 0;
 }
