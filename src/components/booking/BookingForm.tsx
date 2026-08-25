@@ -5,10 +5,11 @@ import { format } from "date-fns";
 import { bookingFormSchema, BookingFormValues } from "@/lib/validations/booking";
 import { DoctorCardData } from "@/types";
 import { Input } from "@/components/ui/Input";
+import { Select } from "@/components/ui/Select";
 import { Textarea } from "@/components/ui/Textarea";
 import { Button } from "@/components/ui/Button";
 import SlotPicker from "./SlotPicker";
-import { User, Mail, Phone, IndianRupee, Loader2, CheckCircle2 } from "lucide-react";
+import { User, Mail, Phone, IndianRupee, Loader2, CheckCircle2, UserCheck } from "lucide-react";
 import { generateRefId } from "@/lib/utils";
 
 interface BookingFormProps {
@@ -36,6 +37,8 @@ export default function BookingForm({ doctor, onSuccess, onCancel }: BookingForm
       patientName: "",
       patientEmail: "",
       patientPhone: "",
+      patientAge: "",
+      patientGender: "",
       patientNotes: "",
     },
   });
@@ -51,6 +54,13 @@ export default function BookingForm({ doctor, onSuccess, onCancel }: BookingForm
     const refId = generateRefId();
     onSuccess({ ...data, referenceId: refId });
   };
+
+  const genderOptions = [
+    { value: "", label: "Select Gender" },
+    { value: "Male", label: "Male" },
+    { value: "Female", label: "Female" },
+    { value: "Other", label: "Other" },
+  ];
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -106,14 +116,38 @@ export default function BookingForm({ doctor, onSuccess, onCancel }: BookingForm
           />
         </div>
 
-        <Input
-          label="Phone Number (10 Digits)"
-          type="tel"
-          placeholder="9876543210"
-          icon={<Phone className="h-4 w-4" />}
-          {...register("patientPhone")}
-          error={errors.patientPhone?.message}
-        />
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="sm:col-span-1">
+            <Input
+              label="Phone Number"
+              type="tel"
+              placeholder="9876543210"
+              icon={<Phone className="h-4 w-4" />}
+              {...register("patientPhone")}
+              error={errors.patientPhone?.message}
+            />
+          </div>
+
+          <div className="sm:col-span-1">
+            <Input
+              label="Age"
+              type="number"
+              placeholder="28"
+              icon={<UserCheck className="h-4 w-4" />}
+              {...register("patientAge")}
+              error={errors.patientAge?.message}
+            />
+          </div>
+
+          <div className="sm:col-span-1">
+            <Select
+              label="Gender"
+              options={genderOptions}
+              {...register("patientGender")}
+              error={errors.patientGender?.message}
+            />
+          </div>
+        </div>
 
         <Textarea
           label="Reason for Visit / Patient Notes (Optional)"

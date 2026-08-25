@@ -2,7 +2,7 @@ import { useState } from "react";
 import { DoctorCardData } from "@/types";
 import { BookingFormValues } from "@/lib/validations/booking";
 import BookingForm from "./BookingForm";
-import { X, CheckCircle2, Calendar, Clock, MapPin, ShieldCheck } from "lucide-react";
+import { X, CheckCircle2, Calendar, Clock, MapPin, ShieldCheck, User } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { format } from "date-fns";
 
@@ -89,9 +89,11 @@ export default function BookingModal({ doctor, isOpen, onClose }: BookingModalPr
                 <span className="truncate">{doctor.clinicInfo}</span>
               </div>
 
-              <div className="flex justify-between items-center pt-2 border-t border-slate-200">
-                <span className="text-slate-500 text-xs">Patient</span>
-                <span className="font-semibold text-slate-900">{confirmedBooking.patientName}</span>
+              <div className="flex items-center gap-2 text-slate-700 pt-2 border-t border-slate-200">
+                <User className="h-4 w-4 text-slate-400 shrink-0" />
+                <span>
+                  Patient: <span className="font-semibold text-slate-900">{confirmedBooking.patientName}</span> ({confirmedBooking.patientAge} yrs, {confirmedBooking.patientGender})
+                </span>
               </div>
             </div>
 
