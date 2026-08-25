@@ -29,7 +29,7 @@ export default function Navbar() {
           <Button variant="ghost" className="hidden sm:inline-flex font-bold text-slate-800 hover:bg-white/60 bg-white/30 backdrop-blur-sm border border-white/40 shadow-sm">
             Log in
           </Button>
-          <Button className="font-bold shadow-lg shadow-secondary-500/30">Book Appointment</Button>
+          <Button className="font-bold shadow-lg shadow-secondary-500/30 bg-secondary-600 hover:bg-secondary-700 text-white">Book Appointment</Button>
         </div>
       </div>
     </header>
