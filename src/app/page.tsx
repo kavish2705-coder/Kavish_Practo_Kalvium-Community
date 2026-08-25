@@ -31,14 +31,14 @@ export default function Home() {
         <div className="container mx-auto px-4 md:px-6 relative z-20">
           <div className="flex justify-end">
             <div className="max-w-2xl text-right animate-slow-slide-in-right">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 backdrop-blur-md border border-slate-200 text-sm font-medium text-teal-700 mb-6 shadow-sm">
-                <span className="flex h-2 w-2 rounded-full bg-teal-500 animate-pulse"></span>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 backdrop-blur-md border border-slate-200 text-sm font-medium text-secondary-700 mb-6 shadow-sm">
+                <span className="flex h-2 w-2 rounded-full bg-secondary-500 animate-pulse"></span>
                 Top-rated Doctors Available Now
               </div>
               
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 mb-6 leading-tight">
                 Expert Healthcare,<br/>
-                <span className="text-teal-600">
+                <span className="text-secondary-600">
                   Just a Click Away.
                 </span>
               </h1>
@@ -47,22 +47,22 @@ export default function Home() {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-end">
-                <Button size="lg" className="h-12 px-8 text-base shadow-lg shadow-teal-500/20 bg-teal-600 hover:bg-teal-700 text-white border-0">
+                <Button size="lg" className="h-12 px-8 text-base shadow-lg shadow-secondary-500/20 bg-secondary-600 hover:bg-secondary-700 text-white border-0">
                   <Search className="mr-2 h-5 w-5" />
                   Find a Doctor
                 </Button>
-                <Button size="lg" variant="outline" className="h-12 px-8 text-base bg-white/50 backdrop-blur-sm border-teal-200 hover:bg-teal-50">
+                <Button size="lg" variant="outline" className="h-12 px-8 text-base bg-white/50 backdrop-blur-sm border-secondary-200 hover:bg-secondary-50">
                   View Specialties
                 </Button>
               </div>
 
               <div className="mt-10 flex items-center justify-end gap-6 text-sm text-slate-600 font-medium">
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-teal-600" />
+                  <CheckCircle2 className="h-5 w-5 text-secondary-600" />
                   <span>Verified Doctors</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-teal-600" />
+                  <CheckCircle2 className="h-5 w-5 text-secondary-600" />
                   <span>Instant Booking</span>
                 </div>
               </div>
@@ -86,7 +86,7 @@ export default function Home() {
             
             {/* Step 1 */}
             <div className="relative bg-white rounded-2xl p-8 shadow-sm ring-1 ring-slate-200 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
-              <div className="w-16 h-16 bg-teal-50 rounded-2xl flex items-center justify-center mb-6 text-teal-600 shadow-inner">
+              <div className="w-16 h-16 bg-secondary-50 rounded-2xl flex items-center justify-center mb-6 text-secondary-600 shadow-inner">
                 <Search className="h-8 w-8" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">1. Find a Doctor</h3>
@@ -104,7 +104,7 @@ export default function Home() {
 
             {/* Step 3 */}
             <div className="relative bg-white rounded-2xl p-8 shadow-sm ring-1 ring-slate-200 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
-              <div className="w-16 h-16 bg-teal-50 rounded-2xl flex items-center justify-center mb-6 text-teal-600 shadow-inner">
+              <div className="w-16 h-16 bg-secondary-50 rounded-2xl flex items-center justify-center mb-6 text-secondary-600 shadow-inner">
                 <Activity className="h-8 w-8" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">3. Get Consulted</h3>
