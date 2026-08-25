@@ -9,6 +9,8 @@
   --color-primary-50: #faf5ff;
   --color-primary-100: #f3e8ff;
   --color-primary-200: #e9d5ff;
+  --color-primary-300: #d8b4fe;
+  --color-primary-400: #c084fc;
   --color-primary-500: #a855f7;
   --color-primary-600: #9333ea;
   --color-primary-700: #7e22ce;
@@ -17,21 +19,18 @@
   --color-secondary-50: #f0f7ea;
   --color-secondary-100: #ddead3;
   --color-secondary-200: #cadbc0;
+  --color-secondary-300: #b6c99c;
+  --color-secondary-400: #95ae72;
   --color-secondary-500: #84a98c;
   --color-secondary-600: #52796f;
   --color-secondary-700: #354f52;
+  --color-secondary-800: #293e40;
+  --color-secondary-900: #1d2c2e;
 }
 
 :root {
   --background: #f8fafc;
   --foreground: #0f172a;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #020617;
-    --foreground: #f8fafc;
-  }
 }
 
 body {
@@ -42,17 +41,26 @@ body {
 }
 
 .glass {
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.7);
 }
 
-@media (prefers-color-scheme: dark) {
-  .glass {
-    background: rgba(2, 6, 23, 0.75);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(226, 232, 240, 0.7);
+  box-shadow: 0 4px 20px 0 rgba(72, 92, 44, 0.05);
+}
+
+.glass-modal {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 20px 50px 0 rgba(15, 23, 42, 0.12);
 }
 
 @keyframes slow-fade-in-blur {
