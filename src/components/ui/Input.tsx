@@ -13,20 +13,20 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="w-full flex flex-col gap-1.5">
         {label && (
-          <label className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200">
+          <label className="text-xs font-bold uppercase tracking-wider text-white">
             {label}
           </label>
         )}
         <div className="relative flex items-center">
           {icon && (
-            <div className="absolute left-3 text-slate-500 dark:text-slate-400 pointer-events-none">
+            <div className="absolute left-3 text-slate-400 pointer-events-none">
               {icon}
             </div>
           )}
           <input
             type={type}
             className={cn(
-              "flex h-11 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-800/90 px-3.5 py-2 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-secondary-600 focus:border-secondary-600 transition-all disabled:cursor-not-allowed disabled:opacity-50 shadow-sm",
+              "flex h-11 w-full rounded-xl border border-slate-700 bg-slate-800 px-3.5 py-2 text-sm text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500 transition-all disabled:cursor-not-allowed disabled:opacity-50 shadow-sm font-medium",
               icon && "pl-10",
               error && "border-red-500 ring-1 ring-red-500 focus:ring-red-500 focus:border-red-500",
               className
@@ -36,7 +36,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           />
         </div>
         {error && (
-          <p className="text-xs font-medium text-red-500">
+          <p className="text-xs font-semibold text-red-400">
             {error}
           </p>
         )}
