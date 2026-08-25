@@ -5,16 +5,24 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
   
-  /* Primary Medical Teal Palette */
+  /* Primary Medical Palette */
   --color-primary-50: #f0fdfa;
   --color-primary-100: #ccfbf1;
   --color-primary-500: #14b8a6;
   --color-primary-600: #0d9488;
   --color-primary-700: #0f766e;
   
-  /* Secondary Indigo */
-  --color-secondary-500: #6366f1;
-  --color-secondary-600: #4f46e5;
+  /* Secondary Pale Olive Green Palette */
+  --color-secondary-50: #f6f8f2;
+  --color-secondary-100: #ebf0e2;
+  --color-secondary-200: #d4dfc3;
+  --color-secondary-300: #b6c99c;
+  --color-secondary-400: #95ae72;
+  --color-secondary-500: #779352;
+  --color-secondary-600: #5c7639;
+  --color-secondary-700: #485c2c;
+  --color-secondary-800: #3b4a24;
+  --color-secondary-900: #313d20;
 }
 
 :root {
@@ -37,15 +45,40 @@ body {
 }
 
 .glass {
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 32px 0 rgba(72, 92, 44, 0.07);
+}
+
+.glass-modal {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 20px 50px 0 rgba(0, 0, 0, 0.15);
 }
 
 @media (prefers-color-scheme: dark) {
   .glass {
     background: rgba(2, 6, 23, 0.75);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .glass-card {
+    background: rgba(15, 23, 42, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  }
+  .glass-modal {
+    background: rgba(15, 23, 42, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.15);
   }
 }
