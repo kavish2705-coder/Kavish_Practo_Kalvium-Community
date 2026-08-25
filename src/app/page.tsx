@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Navbar from "@/components/shared/Navbar";
 import { Button } from "@/components/ui/Button";
 import DoctorCard from "@/components/doctors/DoctorCard";
 import BookingModal from "@/components/booking/BookingModal";
@@ -32,27 +31,25 @@ export default function Home() {
   const getSpecialtyIcon = (iconName: string) => {
     switch (iconName) {
       case "HeartPulse":
-        return <HeartPulse className="h-6 w-6 text-secondary-600" />;
+        return <HeartPulse className="h-6 w-6 text-secondary-600 dark:text-secondary-400" />;
       case "Sparkles":
-        return <Sparkles className="h-6 w-6 text-secondary-600" />;
+        return <Sparkles className="h-6 w-6 text-secondary-600 dark:text-secondary-400" />;
       case "Baby":
-        return <Baby className="h-6 w-6 text-secondary-600" />;
+        return <Baby className="h-6 w-6 text-secondary-600 dark:text-secondary-400" />;
       case "Stethoscope":
-        return <Stethoscope className="h-6 w-6 text-secondary-600" />;
+        return <Stethoscope className="h-6 w-6 text-secondary-600 dark:text-secondary-400" />;
       case "Activity":
-        return <Activity className="h-6 w-6 text-secondary-600" />;
+        return <Activity className="h-6 w-6 text-secondary-600 dark:text-secondary-400" />;
       case "Brain":
-        return <Brain className="h-6 w-6 text-secondary-600" />;
+        return <Brain className="h-6 w-6 text-secondary-600 dark:text-secondary-400" />;
       default:
-        return <Stethoscope className="h-6 w-6 text-secondary-600" />;
+        return <Stethoscope className="h-6 w-6 text-secondary-600 dark:text-secondary-400" />;
     }
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-slate-50">
-      <Navbar />
-
-      <section className="relative overflow-hidden bg-gradient-to-br from-secondary-50/90 via-white to-slate-50 pt-16 md:pt-24 pb-20">
+    <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-slate-950">
+      <section className="relative overflow-hidden bg-gradient-to-br from-secondary-50/90 via-white to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 pt-16 md:pt-24 pb-20">
         <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[500px] h-[500px] bg-secondary-200/40 rounded-full blur-3xl opacity-50 -z-10 mix-blend-multiply" />
         <div className="absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-[500px] h-[500px] bg-secondary-100/50 rounded-full blur-3xl opacity-50 -z-10 mix-blend-multiply" />
 

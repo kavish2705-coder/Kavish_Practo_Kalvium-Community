@@ -64,20 +64,20 @@ export default function BookingForm({ doctor, onSuccess, onCancel }: BookingForm
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-      <div className="flex items-center gap-4 bg-secondary-50/80 p-4 rounded-2xl border border-secondary-200/80">
+      <div className="flex items-center gap-4 bg-secondary-50/90 dark:bg-secondary-950/70 p-4 rounded-2xl border border-secondary-200/80 dark:border-secondary-800">
         <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-secondary-600 to-secondary-800 flex items-center justify-center text-white font-bold text-lg shadow-sm">
           {doctor.name.replace("Dr. ", "").charAt(0)}
         </div>
         <div className="flex-1">
-          <h4 className="font-bold text-slate-900">{doctor.name}</h4>
-          <p className="text-xs text-secondary-800 font-medium">
+          <h4 className="font-bold text-slate-900 dark:text-white">{doctor.name}</h4>
+          <p className="text-xs text-secondary-800 dark:text-secondary-200 font-semibold">
             {doctor.specialization} • {doctor.clinicInfo}
           </p>
         </div>
         <div className="text-right">
-          <span className="text-xs text-slate-500 block">Fee</span>
-          <span className="font-bold text-slate-900 flex items-center justify-end text-sm">
-            <IndianRupee className="h-3.5 w-3.5 text-secondary-700" />
+          <span className="text-xs text-slate-600 dark:text-slate-300 block font-medium">Fee</span>
+          <span className="font-bold text-slate-900 dark:text-white flex items-center justify-end text-sm">
+            <IndianRupee className="h-3.5 w-3.5 text-secondary-700 dark:text-secondary-400" />
             {doctor.fee}
           </span>
         </div>
@@ -92,8 +92,8 @@ export default function BookingForm({ doctor, onSuccess, onCancel }: BookingForm
         error={errors.startTime?.message || errors.appointmentDate?.message}
       />
 
-      <div className="space-y-4 pt-2 border-t border-slate-200">
-        <h5 className="text-xs font-semibold uppercase tracking-wider text-slate-700">
+      <div className="space-y-4 pt-2 border-t border-slate-200 dark:border-slate-800">
+        <h5 className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200">
           Patient Details
         </h5>
 
@@ -158,13 +158,13 @@ export default function BookingForm({ doctor, onSuccess, onCancel }: BookingForm
         />
       </div>
 
-      <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-200">
+      <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
         {onCancel && (
           <Button type="button" variant="outline" onClick={onCancel} disabled={isSubmitting}>
             Cancel
           </Button>
         )}
-        <Button type="submit" disabled={isSubmitting} className="min-w-[160px] shadow-md">
+        <Button type="submit" disabled={isSubmitting} className="min-w-[160px] shadow-md bg-secondary-600 text-white hover:bg-secondary-700">
           {isSubmitting ? (
             <>
               <Loader2 className="h-4 w-4 animate-spin mr-2" />

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import Navbar from "@/components/shared/Navbar";
 import DoctorCard from "@/components/doctors/DoctorCard";
 import DoctorFilters from "@/components/doctors/DoctorFilters";
 import BookingModal from "@/components/booking/BookingModal";
@@ -76,20 +75,18 @@ export default function DoctorsPage() {
   }, [filters]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50">
-      <Navbar />
-
-      <section className="bg-gradient-to-r from-secondary-50 via-white to-secondary-50/40 py-10 border-b border-slate-200/80">
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950">
+      <section className="bg-gradient-to-r from-secondary-50 via-white to-secondary-50/40 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 py-10 border-b border-slate-200/80 dark:border-slate-800">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-100 text-secondary-800 text-xs font-semibold border border-secondary-200 mb-3">
-              <Stethoscope className="h-3.5 w-3.5 text-secondary-600" />
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-100 dark:bg-secondary-950 text-secondary-800 dark:text-secondary-200 text-xs font-semibold border border-secondary-200 dark:border-secondary-800 mb-3">
+              <Stethoscope className="h-3.5 w-3.5 text-secondary-600 dark:text-secondary-400" />
               Verified Healthcare Professionals
             </span>
-            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
+            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
               Find & Book Expert Doctors
             </h1>
-            <p className="text-slate-600 mt-2 text-sm sm:text-base">
+            <p className="text-slate-600 dark:text-slate-300 mt-2 text-sm sm:text-base">
               Browse top-rated specialists, check real-time slot availability, and confirm your appointment instantly.
             </p>
           </div>
@@ -105,8 +102,8 @@ export default function DoctorsPage() {
         />
 
         <div className="flex items-center justify-between mb-6">
-          <p className="text-sm font-medium text-slate-600">
-            Showing <span className="font-bold text-slate-900">{filteredDoctors.length}</span> verified doctors
+          <p className="text-sm font-medium text-slate-600 dark:text-slate-300">
+            Showing <span className="font-bold text-slate-900 dark:text-white">{filteredDoctors.length}</span> verified doctors
           </p>
         </div>
 
@@ -121,17 +118,17 @@ export default function DoctorsPage() {
             ))}
           </div>
         ) : (
-          <div className="glass-card rounded-2xl p-12 text-center max-w-md mx-auto my-8 border border-white/60">
-            <div className="w-12 h-12 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-4">
+          <div className="glass-card rounded-2xl p-12 text-center max-w-md mx-auto my-8 border border-white/60 dark:border-slate-800">
+            <div className="w-12 h-12 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 flex items-center justify-center mx-auto mb-4">
               <Frown className="h-6 w-6" />
             </div>
-            <h3 className="text-lg font-bold text-slate-900 mb-1">No Doctors Found</h3>
-            <p className="text-xs text-slate-500 mb-4">
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1">No Doctors Found</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
               We couldn’t find any doctors matching your selected filters.
             </p>
             <button
               onClick={handleReset}
-              className="text-xs font-semibold text-secondary-700 hover:underline"
+              className="text-xs font-semibold text-secondary-700 dark:text-secondary-400 hover:underline"
             >
               Clear all filters and search again
             </button>
