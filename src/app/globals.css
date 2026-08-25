@@ -5,16 +5,21 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
   
-  /* Primary Medical Teal Palette */
-  --color-primary-50: #f0fdfa;
-  --color-primary-100: #ccfbf1;
-  --color-primary-500: #14b8a6;
-  --color-primary-600: #0d9488;
-  --color-primary-700: #0f766e;
+  /* Primary Lavender Palette */
+  --color-primary-50: #faf5ff;
+  --color-primary-100: #f3e8ff;
+  --color-primary-200: #e9d5ff;
+  --color-primary-500: #a855f7;
+  --color-primary-600: #9333ea;
+  --color-primary-700: #7e22ce;
   
-  /* Secondary Indigo */
-  --color-secondary-500: #6366f1;
-  --color-secondary-600: #4f46e5;
+  /* Secondary Pale Olive Green Palette */
+  --color-secondary-50: #f0f7ea;
+  --color-secondary-100: #ddead3;
+  --color-secondary-200: #cadbc0;
+  --color-secondary-500: #84a98c;
+  --color-secondary-600: #52796f;
+  --color-secondary-700: #354f52;
 }
 
 :root {
