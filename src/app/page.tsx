@@ -72,43 +72,48 @@ export default function Home() {
       </section>
 
       {/* HOW IT WORKS SECTION */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">How It Works</h2>
-            <p className="text-lg text-slate-600">
+      <section className="py-24 bg-gradient-to-b from-slate-50 to-secondary-50/50 relative overflow-hidden">
+        {/* Subtle background glow */}
+        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/3 w-[600px] h-[600px] bg-secondary-200/40 rounded-full blur-[100px] -z-10" />
+        <div className="absolute bottom-0 left-0 translate-y-1/3 -translate-x-1/3 w-[500px] h-[500px] bg-blue-100/40 rounded-full blur-[100px] -z-10" />
+
+        <div className="container mx-auto px-4 md:px-6 relative z-10">
+          <div className="text-center max-w-2xl mx-auto mb-20 animate-slow-slide-in-right" style={{ animationDelay: '0.4s' }}>
+            <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight">How It Works</h2>
+            <p className="text-lg text-slate-600 leading-relaxed">
               Booking an appointment has never been this easy. Get consulted by top professionals in three simple steps.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 relative">
-            <div className="absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-slate-200 to-transparent -translate-y-1/2 hidden md:block" />
+            {/* Connecting Line */}
+            <div className="absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-secondary-300 to-transparent -translate-y-1/2 hidden md:block opacity-50" />
             
             {/* Step 1 */}
-            <div className="relative bg-white rounded-2xl p-8 shadow-sm ring-1 ring-slate-200 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
-              <div className="w-16 h-16 bg-secondary-50 rounded-2xl flex items-center justify-center mb-6 text-secondary-600 shadow-inner">
+            <div className="relative bg-white/40 backdrop-blur-xl rounded-3xl p-8 shadow-xl shadow-slate-200/50 ring-1 ring-white/60 hover:-translate-y-2 hover:shadow-secondary-500/20 transition-all duration-500 group cursor-pointer animate-slow-fade-in-blur" style={{ animationDelay: '0.6s' }}>
+              <div className="w-16 h-16 bg-gradient-to-br from-white to-secondary-100 rounded-2xl flex items-center justify-center mb-6 text-secondary-600 shadow-sm ring-1 ring-white group-hover:scale-110 transition-transform duration-300">
                 <Search className="h-8 w-8" />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">1. Find a Doctor</h3>
-              <p className="text-slate-600">Search for specialized doctors near you based on symptoms or specialty.</p>
+              <h3 className="text-xl font-extrabold text-slate-900 mb-3">1. Find a Doctor</h3>
+              <p className="text-slate-600 leading-relaxed">Search for specialized doctors near you based on symptoms or specialty.</p>
             </div>
 
             {/* Step 2 */}
-            <div className="relative bg-white rounded-2xl p-8 shadow-sm ring-1 ring-slate-200 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
-              <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 text-blue-600 shadow-inner">
+            <div className="relative bg-white/40 backdrop-blur-xl rounded-3xl p-8 shadow-xl shadow-slate-200/50 ring-1 ring-white/60 hover:-translate-y-2 hover:shadow-secondary-500/20 transition-all duration-500 group cursor-pointer animate-slow-fade-in-blur" style={{ animationDelay: '0.8s' }}>
+              <div className="w-16 h-16 bg-gradient-to-br from-white to-secondary-100 rounded-2xl flex items-center justify-center mb-6 text-secondary-600 shadow-sm ring-1 ring-white group-hover:scale-110 transition-transform duration-300">
                 <Calendar className="h-8 w-8" />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">2. Choose a Slot</h3>
-              <p className="text-slate-600">View real-time availability and select a time that fits your schedule perfectly.</p>
+              <h3 className="text-xl font-extrabold text-slate-900 mb-3">2. Choose a Slot</h3>
+              <p className="text-slate-600 leading-relaxed">View real-time availability and select a time that fits your schedule perfectly.</p>
             </div>
 
             {/* Step 3 */}
-            <div className="relative bg-white rounded-2xl p-8 shadow-sm ring-1 ring-slate-200 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
-              <div className="w-16 h-16 bg-secondary-50 rounded-2xl flex items-center justify-center mb-6 text-secondary-600 shadow-inner">
+            <div className="relative bg-white/40 backdrop-blur-xl rounded-3xl p-8 shadow-xl shadow-slate-200/50 ring-1 ring-white/60 hover:-translate-y-2 hover:shadow-secondary-500/20 transition-all duration-500 group cursor-pointer animate-slow-fade-in-blur" style={{ animationDelay: '1.0s' }}>
+              <div className="w-16 h-16 bg-gradient-to-br from-white to-secondary-100 rounded-2xl flex items-center justify-center mb-6 text-secondary-600 shadow-sm ring-1 ring-white group-hover:scale-110 transition-transform duration-300">
                 <Activity className="h-8 w-8" />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">3. Get Consulted</h3>
-              <p className="text-slate-600">Visit the clinic or consult online and get back to your best health.</p>
+              <h3 className="text-xl font-extrabold text-slate-900 mb-3">3. Get Consulted</h3>
+              <p className="text-slate-600 leading-relaxed">Visit the clinic or consult online and get back to your best health.</p>
             </div>
 
           </div>
@@ -116,9 +121,10 @@ export default function Home() {
       </section>
       
       {/* FOOTER */}
-      <footer className="bg-slate-950 py-12 border-t border-slate-800">
-        <div className="container mx-auto px-4 md:px-6 text-center">
-          <p className="text-slate-400 text-sm">
+      <footer className="bg-slate-950 py-12 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-t from-secondary-900/20 to-transparent pointer-events-none" />
+        <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
+          <p className="text-slate-400 text-sm font-medium">
             © {new Date().getFullYear()} PractoClone. All rights reserved. Built for Sprint 1.
           </p>
         </div>
