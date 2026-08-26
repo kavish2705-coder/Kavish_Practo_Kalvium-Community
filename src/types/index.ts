@@ -1,4 +1,4 @@
-import { Role } from '@prisma/client';
+import { Role } from "@prisma/client";
 
 export type ApiResponse<T = unknown> = {
   success: boolean;
@@ -26,4 +26,13 @@ export type BookAppointmentRequest = {
   doctorId: string;
   startTime: string; // ISO string
   patientNotes?: string;
+};
+
+export type DoctorAppointment = {
+  id: string;
+  patient: Pick<SafeUser, "id" | "name">;
+  startTime: Date;
+  endTime: Date;
+  status: "CONFIRMED" | "CANCELLED" | "COMPLETED";
+  patientNotes: string | null;
 };
