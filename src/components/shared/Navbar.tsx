@@ -27,6 +27,22 @@ export default function Navbar() {
         </nav>
         
         <div className="flex items-center gap-4">
+          {/* 
+            ==========================================================================
+            LOGIN PAGE IMPLEMENTATION PLAN (Triggered on 'Log in' click)
+            ==========================================================================
+            1. Navigation / Modal Trigger:
+               - On click, trigger open state for <LoginModal /> or route to '/login?redirect=...'.
+            2. User Login Form & Authentication Flow:
+               - Collect user Phone Number / Email and Password or 6-digit OTP.
+               - Submit credentials to backend endpoint `/api/auth/login`.
+            3. Session Context & State Management:
+               - Store authenticated session in AuthContext and secure HttpOnly cookie.
+               - Swap this 'Log in' button with <UserNav /> displaying user initials & avatar dropdown.
+            4. Post-Login Redirection:
+               - Redirect back to active flow (e.g. Doctor Booking modal) or Patient Dashboard.
+            ==========================================================================
+          */}
           <Button variant="ghost" className="hidden sm:inline-flex font-bold text-slate-800 hover:bg-white/60 bg-white/30 backdrop-blur-sm border border-white/40 shadow-sm">
             Log in
           </Button>
