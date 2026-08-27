@@ -43,8 +43,8 @@ export default function Navbar() {
                - Redirect back to active flow (e.g. Doctor Booking modal) or Patient Dashboard.
             ==========================================================================
           */}
-          <Button variant="ghost" className="hidden sm:inline-flex font-bold text-slate-800 hover:bg-white/60 bg-white/30 backdrop-blur-sm border border-white/40 shadow-sm">
-            Log in
+          <Button asChild variant="ghost" className="hidden sm:inline-flex font-bold text-slate-800 hover:bg-white/60 bg-white/30 backdrop-blur-sm border border-white/40 shadow-sm">
+            <Link href="/login">Log in</Link>
           </Button>
           <Button asChild className="font-bold shadow-lg shadow-secondary-500/30 bg-secondary-600 hover:bg-secondary-700 text-white">
             <Link href="/doctors">Book Appointment</Link>
