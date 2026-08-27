@@ -43,16 +43,58 @@ export default function BookingForm({ doctor, onSuccess, onCancel }: BookingForm
     },
   });
 
+  const [apiError, setApiError] = useState<string | null>(null);
   const selectedDate = useWatch({ control, name: "appointmentDate" }) || defaultDate;
   const selectedStartTime = useWatch({ control, name: "startTime" }) || "";
 
   const onSubmit = async (data: BookingFormValues) => {
     setIsSubmitting(true);
-    await new Promise((res) => setTimeout(res, 800));
-    setIsSubmitting(false);
+    setApiError(null);
 
-    const refId = generateRefId();
-    onSuccess({ ...data, referenceId: refId });
+    try {
+      const response = await fetch("/api/appointments", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        let errorMessage = `Booking failed (Server returned ${response.status})`;
+        try {
+          const errorData = await response.json();
+          if (errorData?.error) {
+            errorMessage = errorData.error;
+          } else if (errorData?.message) {
+            errorMessage = errorData.message;
+          }
+        } catch {
+          // Response was not JSON
+        }
+        setApiError(errorMessage);
+        setIsSubmitting(false);
+        return;
+      }
+
+      const result = await response.json().catch(() => ({}));
+      const referenceId =
+        result?.data?.referenceId ||
+        result?.referenceId ||
+        result?.id ||
+        generateRefId();
+
+      setIsSubmitting(false);
+      onSuccess({ ...data, referenceId });
+    } catch (err: unknown) {
+      console.error("Booking API submission error:", err);
+      setApiError(
+        err instanceof Error
+          ? err.message
+          : "Unable to connect to booking service. Please try again later."
+      );
+      setIsSubmitting(false);
+    }
   };
 
   const genderOptions = [
@@ -64,6 +106,18 @@ export default function BookingForm({ doctor, onSuccess, onCancel }: BookingForm
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      {apiError && (
+        <div className="p-3.5 rounded-xl bg-red-50 border border-red-200 text-xs font-semibold text-red-700 flex items-center justify-between shadow-xs">
+          <span>{apiError}</span>
+          <button
+            type="button"
+            onClick={() => setApiError(null)}
+            className="text-red-500 hover:text-red-800 font-bold ml-3 text-sm focus:outline-none"
+          >
+            ✕
+          </button>
+        </div>
+      )}
       <div className="flex items-center gap-4 bg-secondary-50/80 p-4 rounded-2xl border border-secondary-200">
         <div className="w-12 h-12 rounded-xl bg-secondary-600 flex items-center justify-center text-white font-bold text-lg shadow-sm">
           {doctor.name.replace("Dr. ", "").charAt(0)}
