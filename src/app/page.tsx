@@ -91,12 +91,16 @@ export default function Home() {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-end">
-                <Button size="lg" className="h-12 px-8 text-base shadow-lg shadow-secondary-500/20 bg-secondary-600 hover:bg-secondary-700 text-white border-0">
-                  <Search className="mr-2 h-5 w-5" />
-                  Find a Doctor
+                <Button size="lg" asChild className="h-12 px-8 text-base shadow-lg shadow-secondary-500/20 bg-secondary-600 hover:bg-secondary-700 text-white border-0">
+                  <Link href="/doctors">
+                    <Search className="mr-2 h-5 w-5" />
+                    Find a Doctor
+                  </Link>
                 </Button>
-                <Button size="lg" variant="outline" className="h-12 px-8 text-base bg-white/50 backdrop-blur-sm border-secondary-200 hover:bg-secondary-50">
-                  View Specialties
+                <Button size="lg" variant="outline" asChild className="h-12 px-8 text-base bg-white/50 backdrop-blur-sm border-secondary-200 hover:bg-secondary-50">
+                  <Link href="#specialties">
+                    View Specialties
+                  </Link>
                 </Button>
               </div>
 
