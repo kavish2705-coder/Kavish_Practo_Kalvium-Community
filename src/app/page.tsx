@@ -97,10 +97,13 @@ export default function Home() {
                     Find a Doctor
                   </Link>
                 </Button>
-                <Button size="lg" variant="outline" asChild className="h-12 px-8 text-base bg-white/50 backdrop-blur-sm border-secondary-200 hover:bg-secondary-50">
-                  <Link href="#specialties">
-                    View Specialties
-                  </Link>
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  onClick={() => document.getElementById('specialties')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="h-12 px-8 text-base bg-white/50 backdrop-blur-sm border-secondary-200 hover:bg-secondary-50"
+                >
+                  View Specialties
                 </Button>
               </div>
 

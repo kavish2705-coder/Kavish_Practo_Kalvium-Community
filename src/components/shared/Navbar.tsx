@@ -1,7 +1,19 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 
 export default function Navbar() {
+  const pathname = usePathname();
+
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <header className="fixed top-0 z-50 w-full bg-white/20 backdrop-blur-md border-b border-white/30">
       <div className="container mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
@@ -18,10 +30,18 @@ export default function Navbar() {
           <Link href="/doctors" className="hover:text-secondary-700 transition-colors drop-shadow-sm">
             Find Doctors
           </Link>
-          <Link href="/#specialties" className="hover:text-secondary-700 transition-colors drop-shadow-sm">
+          <Link 
+            href="/#specialties" 
+            onClick={(e) => handleScroll(e, 'specialties')}
+            className="hover:text-secondary-700 transition-colors drop-shadow-sm"
+          >
             Specialties
           </Link>
-          <Link href="/#how-it-works" className="hover:text-secondary-700 transition-colors drop-shadow-sm">
+          <Link 
+            href="/#how-it-works" 
+            onClick={(e) => handleScroll(e, 'how-it-works')}
+            className="hover:text-secondary-700 transition-colors drop-shadow-sm"
+          >
             How It Works
           </Link>
         </nav>
