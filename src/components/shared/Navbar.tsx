@@ -22,7 +22,7 @@ export default function Navbar() {
             P
           </div>
           <span className="font-extrabold text-xl hidden sm:inline-block text-slate-900 group-hover:text-secondary-700 transition-colors">
-            PractoClone
+            PRACTO
           </span>
         </Link>
         

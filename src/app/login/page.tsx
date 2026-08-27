@@ -23,7 +23,7 @@ export default function LoginPage() {
       <AuthCard />
 
       <footer className="mt-8 text-center text-xs text-slate-500">
-        <p>© {new Date().getFullYear()} Practo Clone. Preserving patient health & privacy.</p>
+        <p>© {new Date().getFullYear()} PRACTO. Preserving patient health & privacy.</p>
       </footer>
     </div>
   );
