@@ -28,6 +28,17 @@ export type BookAppointmentRequest = {
   patientNotes?: string;
 };
 
+// Doctor dashboard appointment
+export type DoctorAppointment = {
+  id: string;
+  patient: Pick<SafeUser, "id" | "name">;
+  startTime: Date;
+  endTime: Date;
+  status: "CONFIRMED" | "CANCELLED" | "COMPLETED";
+  patientNotes: string | null;
+};
+
+// Doctor card data
 export type DoctorCardData = {
   id: string;
   userId: string;
