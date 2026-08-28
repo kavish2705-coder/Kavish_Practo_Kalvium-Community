@@ -11,6 +11,9 @@ jobs:
     name: Build & Type Check
     runs-on: ubuntu-latest
 
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -31,4 +34,7 @@ jobs:
         run: npm run lint
 
       - name: Type Check & Build
+        env:
+          DATABASE_URL: "postgresql://dummy:dummy@localhost:5432/dummy"
+          NEXTAUTH_SECRET: "dummy_secret_for_build"
         run: npm run build

@@ -525,7 +525,7 @@ export default function PatientDashboardPage() {
 
       <footer className="bg-slate-900 py-8 border-t border-slate-800 text-center text-slate-400 text-xs mt-12">
         <div className="container mx-auto px-4">
-          <p>© {new Date().getFullYear()} Practo Clone. Patient Dashboard.</p>
+          <p>© {new Date().getFullYear()} PRACTO. Patient Dashboard.</p>
         </div>
       </footer>
     </div>

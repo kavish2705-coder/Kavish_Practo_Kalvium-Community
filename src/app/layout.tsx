@@ -9,8 +9,8 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Practo Clone - Medical Consultancy",
-  description: "Find the best doctors and book appointments effortlessly.",
+  title: "PRACTO - Medical Consultancy",
+  description: "Book appointments with top-rated doctors effortlessly.",
 };
 
 export default function RootLayout({
