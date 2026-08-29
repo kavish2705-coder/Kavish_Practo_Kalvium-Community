@@ -128,7 +128,7 @@ export async function GET(req: NextRequest) {
 
         patientEmail: apt.patient.email,
 
-        patientPhone: apt.patient.phone || undefined,
+        patientPhone: (apt.patient as { phone?: string }).phone || undefined,
 
         createdAt: apt.createdAt.toISOString(),
       }));
@@ -221,7 +221,7 @@ export async function GET(req: NextRequest) {
 
         patientEmail: apt.patient.email,
 
-        patientPhone: apt.patient.phone || undefined,
+        patientPhone: (apt.patient as { phone?: string }).phone || undefined,
 
         createdAt: apt.createdAt.toISOString(),
       }));
@@ -550,7 +550,7 @@ export async function POST(request: Request) {
         appointment.patient.email,
 
       patientPhone:
-        appointment.patient.phone ||
+        (appointment.patient as { phone?: string }).phone ||
         undefined,
 
       createdAt:
