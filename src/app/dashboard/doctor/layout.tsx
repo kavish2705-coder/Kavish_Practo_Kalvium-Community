@@ -1,4 +1,4 @@
-import { ReactNode } from "next";
+import { ReactNode } from "react";
 import { DoctorSidebar } from "@/components/dashboard/DoctorSidebar";
 
 export default function DoctorDashboardLayout({
