@@ -19,7 +19,6 @@ import {
   Stethoscope,
   Brain,
   ArrowRight,
-  UserCheck,
   ShieldCheck,
   Phone,
   Mail,

@@ -63,7 +63,7 @@ export default function DoctorDashboardPage() {
       {/* Appointments List */}
       <section className="space-y-4">
         <h2 className="text-xl font-bold text-slate-800 border-b border-slate-200 pb-2">
-          Today's Appointments
+          Today&apos;s Appointments
         </h2>
         
         {MOCK_TODAYS_APPOINTMENTS.length === 0 ? (
