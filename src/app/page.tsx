@@ -21,6 +21,9 @@ import {
   ArrowRight,
   UserCheck,
   ShieldCheck,
+  Phone,
+  Mail,
+  MapPin,
 } from "lucide-react";
 
 export default function Home() {
@@ -190,70 +193,77 @@ export default function Home() {
         </div>
       </section>
 
-      {/* HOW IT WORKS (Premium Dark Glassmorphism) */}
-      <section id="how-it-works" className="relative py-24 bg-slate-900 overflow-hidden">
-        {/* Animated Background Glows */}
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-secondary-600/20 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-primary-600/10 rounded-full blur-[150px] pointer-events-none" />
+      {/* HOW IT WORKS (Dark Gray Galaxy & Glassmorphism) */}
+      <section id="how-it-works" className="relative py-24 bg-slate-900 border-b border-slate-800 overflow-hidden">
+        {/* Starry pattern overlay */}
+        <div className="absolute inset-0 opacity-30" style={{ backgroundImage: 'radial-gradient(circle at center, #ffffff 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at center, #ffffff 1.5px, transparent 1.5px)', backgroundSize: '70px 70px', backgroundPosition: '20px 20px' }} />
+        
+        {/* Nebula / Ambient Glows */}
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-purple-400/20 rounded-full blur-[120px] pointer-events-none mix-blend-screen" />
+        <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-blue-300/20 rounded-full blur-[140px] pointer-events-none mix-blend-screen" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-white/10 rounded-full blur-[150px] pointer-events-none mix-blend-overlay" />
 
         <div className="container mx-auto px-4 md:px-6 relative z-10">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-xs font-bold uppercase tracking-wider text-secondary-400 bg-secondary-900/50 px-3 py-1 rounded-full border border-secondary-700/50 mb-4 inline-block">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#8a8170] bg-white px-3.5 py-1 rounded-full shadow-sm inline-block">
               Simple Process
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">How Practo Works</h2>
-            <p className="text-slate-400 text-base">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-white mt-4 mb-3 tracking-tight">
+              How Practo Works
+            </h2>
+            <p className="text-white/80 text-base max-w-lg mx-auto">
               Book your doctor appointment in 3 simple steps. No hassle, just care.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 relative">
+          <div className="grid md:grid-cols-3 gap-8 relative">
             {/* Connecting line */}
-            <div className="absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-secondary-500/30 to-transparent -translate-y-1/2 hidden md:block" />
+            <div className="absolute top-1/2 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-y-1/2 hidden md:block" />
             
             {/* Step 1 */}
-            <div className="relative p-8 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 text-center shadow-2xl hover:-translate-y-2 hover:shadow-secondary-500/20 hover:border-secondary-500/50 transition-all duration-500 group overflow-hidden">
-              <div className="absolute -top-8 -right-8 text-[150px] font-black text-white/5 group-hover:text-secondary-500/10 transition-colors pointer-events-none select-none leading-none">
+            <div className="relative p-8 rounded-3xl bg-white/10 backdrop-blur-2xl border border-white/20 text-center shadow-2xl shadow-black/10 hover:-translate-y-2 hover:shadow-white/5 hover:border-white/40 transition-all duration-500 group overflow-hidden">
+              <div className="absolute -top-6 -right-6 text-[140px] font-black text-white/5 group-hover:text-white/10 transition-colors pointer-events-none select-none leading-none">
                 1
               </div>
               <div className="relative z-10">
-                <div className="w-16 h-16 bg-gradient-to-br from-secondary-500 to-secondary-700 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-500">
-                  <Search className="h-8 w-8" />
+                <div className="w-16 h-16 bg-white/20 backdrop-blur-md border border-white/30 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-black/5 group-hover:scale-110 transition-transform duration-500">
+                  <Search className="h-7 w-7 drop-shadow-md" />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3">Search Doctor</h3>
-                <p className="text-sm text-slate-400 leading-relaxed">
+                <h3 className="text-xl font-bold text-white mb-2.5 drop-shadow-sm">Search Doctor</h3>
+                <p className="text-sm text-white/80 leading-relaxed font-light">
                   Filter by specialty, location, experience, or consultation fee.
                 </p>
               </div>
             </div>
 
             {/* Step 2 */}
-            <div className="relative p-8 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 text-center shadow-2xl hover:-translate-y-2 hover:shadow-secondary-500/20 hover:border-secondary-500/50 transition-all duration-500 group overflow-hidden md:translate-y-4">
-              <div className="absolute -top-8 -right-8 text-[150px] font-black text-white/5 group-hover:text-secondary-500/10 transition-colors pointer-events-none select-none leading-none">
+            <div className="relative p-8 rounded-3xl bg-white/10 backdrop-blur-2xl border border-white/20 text-center shadow-2xl shadow-black/10 hover:-translate-y-2 hover:shadow-white/5 hover:border-white/40 transition-all duration-500 group overflow-hidden md:translate-y-4">
+              <div className="absolute -top-6 -right-6 text-[140px] font-black text-white/5 group-hover:text-white/10 transition-colors pointer-events-none select-none leading-none">
                 2
               </div>
               <div className="relative z-10">
-                <div className="w-16 h-16 bg-gradient-to-br from-secondary-500 to-secondary-700 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-500">
-                  <Calendar className="h-8 w-8" />
+                <div className="w-16 h-16 bg-white/20 backdrop-blur-md border border-white/30 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-black/5 group-hover:scale-110 transition-transform duration-500">
+                  <Calendar className="h-7 w-7 drop-shadow-md" />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3">Choose Slot</h3>
-                <p className="text-sm text-slate-400 leading-relaxed">
+                <h3 className="text-xl font-bold text-white mb-2.5 drop-shadow-sm">Choose Slot</h3>
+                <p className="text-sm text-white/80 leading-relaxed font-light">
                   Pick a date and real-time available time slot that suits your schedule.
                 </p>
               </div>
             </div>
 
             {/* Step 3 */}
-            <div className="relative p-8 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 text-center shadow-2xl hover:-translate-y-2 hover:shadow-secondary-500/20 hover:border-secondary-500/50 transition-all duration-500 group overflow-hidden">
-              <div className="absolute -top-8 -right-8 text-[150px] font-black text-white/5 group-hover:text-secondary-500/10 transition-colors pointer-events-none select-none leading-none">
+            <div className="relative p-8 rounded-3xl bg-white/10 backdrop-blur-2xl border border-white/20 text-center shadow-2xl shadow-black/10 hover:-translate-y-2 hover:shadow-white/5 hover:border-white/40 transition-all duration-500 group overflow-hidden">
+              <div className="absolute -top-6 -right-6 text-[140px] font-black text-white/5 group-hover:text-white/10 transition-colors pointer-events-none select-none leading-none">
                 3
               </div>
               <div className="relative z-10">
-                <div className="w-16 h-16 bg-gradient-to-br from-secondary-500 to-secondary-700 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-500">
-                  <ShieldCheck className="h-8 w-8" />
+                <div className="w-16 h-16 bg-white/20 backdrop-blur-md border border-white/30 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-black/5 group-hover:scale-110 transition-transform duration-500">
+                  <ShieldCheck className="h-7 w-7 drop-shadow-md" />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3">Instant Confirmation</h3>
-                <p className="text-sm text-slate-400 leading-relaxed">
+                <h3 className="text-xl font-bold text-white mb-2.5 drop-shadow-sm">Instant Confirmation</h3>
+                <p className="text-sm text-white/80 leading-relaxed font-light">
                   Receive immediate booking reference details with zero double-bookings.
                 </p>
               </div>
@@ -268,9 +278,89 @@ export default function Home() {
         onClose={() => setSelectedDoctorForBooking(null)}
       />
 
-      <footer className="bg-slate-900 py-10 border-t border-slate-800 text-center text-slate-200 text-xs">
+      <footer className="bg-slate-950 pt-20 pb-10 border-t border-slate-800 text-slate-400">
         <div className="container mx-auto px-4 md:px-6">
-          <p>© {new Date().getFullYear()} Practo. All rights reserved. Built for Sprint 1.</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+            
+            {/* Brand Section */}
+            <div className="space-y-4">
+              <Link href="/" className="flex items-center gap-2 mb-4">
+                <Image src="/logo.png" alt="Practo Logo" width={40} height={40} className="w-10 h-10 object-contain" />
+                <span className="text-2xl font-bold tracking-tight text-white">
+                  PRACTO<span className="text-primary-500">.</span>
+                </span>
+              </Link>
+              <p className="text-sm text-slate-400 leading-relaxed">
+                Your trusted partner in healthcare. Book appointments, consult doctors online, and manage your health seamlessly.
+              </p>
+              <div className="flex gap-4 pt-2">
+                <Link href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary-600 hover:text-white transition-colors duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </Link>
+                <Link href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary-600 hover:text-white transition-colors duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                </Link>
+                <Link href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary-600 hover:text-white transition-colors duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </Link>
+                <Link href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary-600 hover:text-white transition-colors duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                </Link>
+              </div>
+            </div>
+
+            {/* Quick Links */}
+            <div className="space-y-4">
+              <h4 className="text-white font-semibold mb-4 text-lg">Quick Links</h4>
+              <ul className="space-y-3">
+                <li><Link href="/doctors" className="hover:text-primary-400 transition-colors">Find a Doctor</Link></li>
+                <li><Link href="/doctors" className="hover:text-primary-400 transition-colors">Book an Appointment</Link></li>
+                <li><a href="https://www.healthline.com/health-news" target="_blank" rel="noopener noreferrer" className="hover:text-primary-400 transition-colors">Health Blog</a></li>
+                <li><Link href="/" className="hover:text-primary-400 transition-colors">Practo Plus</Link></li>
+              </ul>
+            </div>
+
+            {/* Customer Care */}
+            <div className="space-y-4">
+              <h4 className="text-white font-semibold mb-4 text-lg">Customer Care</h4>
+              <ul className="space-y-3">
+                <li><Link href="#" className="hover:text-primary-400 transition-colors">Help Center</Link></li>
+                <li><Link href="#" className="hover:text-primary-400 transition-colors">24/7 Support</Link></li>
+                <li><Link href="#" className="hover:text-primary-400 transition-colors">Patient Guidelines</Link></li>
+                <li><Link href="#" className="hover:text-primary-400 transition-colors">Report an Issue</Link></li>
+                <li><Link href="#" className="hover:text-primary-400 transition-colors">FAQs</Link></li>
+              </ul>
+            </div>
+
+            {/* Contact Us */}
+            <div className="space-y-4">
+              <h4 className="text-white font-semibold mb-4 text-lg">Contact Us</h4>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3">
+                  <MapPin className="w-5 h-5 text-primary-500 shrink-0 mt-0.5" />
+                  <span className="text-sm">123 Health Avenue, Medical District, NY 10001</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Phone className="w-5 h-5 text-primary-500 shrink-0" />
+                  <span className="text-sm">+1 (800) 123-4567</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Mail className="w-5 h-5 text-primary-500 shrink-0" />
+                  <span className="text-sm">support@practo.com</span>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+          
+          <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
+            <p>© {new Date().getFullYear()} PRACTO. All rights reserved. Built for Sprint 1.</p>
+            <div className="flex gap-6">
+              <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
+              <Link href="#" className="hover:text-white transition-colors">Terms of Service</Link>
+              <Link href="#" className="hover:text-white transition-colors">Cookie Policy</Link>
+            </div>
+          </div>
         </div>
       </footer>
     </div>
