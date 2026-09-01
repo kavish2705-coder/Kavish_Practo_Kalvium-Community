@@ -15,8 +15,10 @@ import {
   ChevronRight,
   Loader2,
   RefreshCw,
+  LogIn,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import type { SafeUser } from "@/types";
 
 interface Appointment {
   id: string;
@@ -32,9 +34,12 @@ interface Appointment {
 }
 
 export default function PatientDashboardPage() {
+  const [user, setUser] = useState<SafeUser | null>(null);
+  const [isLoadingUser, setIsLoadingUser] = useState(true);
+
   const [activeTab, setActiveTab] = useState<"upcoming" | "past">("upcoming");
 
-  // State for real upcoming appointments (MOCK_UPCOMING_APPOINTMENTS deleted)
+  // State for real upcoming appointments
   const [upcomingAppointments, setUpcomingAppointments] = useState<Appointment[]>([]);
   const [isLoadingUpcoming, setIsLoadingUpcoming] = useState(true);
 
@@ -84,8 +89,31 @@ export default function PatientDashboardPage() {
       }
     }
 
-    fetchUpcoming();
-    fetchPast();
+    async function checkAuthAndLoadData() {
+      try {
+        const res = await fetch("/api/auth/me");
+        if (res.ok) {
+          const json = await res.json();
+          if (!ignore && json.success && json.data) {
+            setUser(json.data);
+            setIsLoadingUser(false);
+            fetchUpcoming();
+            fetchPast();
+            return;
+          }
+        }
+      } catch (err) {
+        console.error("Failed to check authentication:", err);
+      }
+      if (!ignore) {
+        setUser(null);
+        setIsLoadingUser(false);
+        setIsLoadingUpcoming(false);
+        setIsLoadingPast(false);
+      }
+    }
+
+    checkAuthAndLoadData();
 
     return () => {
       ignore = true;
@@ -167,60 +195,88 @@ export default function PatientDashboardPage() {
       <main className="flex-1 container mx-auto px-4 md:px-6 py-6 max-w-6xl">
         {/* Welcome Header */}
         <div className="glass-card rounded-3xl p-6 sm:p-8 border border-white/70 bg-white/70 backdrop-blur-md mb-8 shadow-sm">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-            <div className="flex items-center gap-4">
-              <div className="w-16 h-16 rounded-2xl bg-secondary-600 flex items-center justify-center text-white font-bold text-2xl shadow-md shadow-secondary-600/20">
-                <User className="h-8 w-8" />
-              </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
-                    Patient Dashboard
-                  </h1>
-                  <span className="px-2.5 py-0.5 rounded-full bg-secondary-100 text-secondary-800 text-xs font-bold border border-secondary-200">
-                    My Account
-                  </span>
-                </div>
-                <p className="text-xs sm:text-sm text-slate-600 mt-1 font-medium">
-                  Manage your doctor consultations, upcoming visits, and medical history.
-                </p>
-              </div>
+          {isLoadingUser ? (
+            <div className="flex items-center justify-center py-8 gap-3 text-slate-600">
+              <Loader2 className="h-6 w-6 animate-spin text-secondary-600" />
+              <span className="text-sm font-medium">Checking authentication...</span>
             </div>
-
-            <div className="flex items-center gap-3 shrink-0">
+          ) : !user ? (
+            <div className="text-center py-6">
+              <div className="w-14 h-14 rounded-2xl bg-secondary-100 text-secondary-700 flex items-center justify-center mx-auto mb-3">
+                <User className="h-7 w-7" />
+              </div>
+              <h2 className="text-xl font-bold text-slate-900">Patient Authentication Required</h2>
+              <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-md mx-auto">
+                Please log in to your patient account to access your medical appointments and history.
+              </p>
               <Button
                 asChild
-                className="bg-secondary-600 hover:bg-secondary-700 text-white font-bold shadow-md shadow-secondary-600/20"
+                className="mt-4 bg-secondary-600 hover:bg-secondary-700 text-white font-bold shadow-md shadow-secondary-600/20"
               >
-                <Link href="/doctors">
-                  <PlusCircle className="h-4 w-4 mr-2" />
-                  Book New Appointment
+                <Link href="/login">
+                  <LogIn className="h-4 w-4 mr-2" />
+                  Log In to Patient Account
                 </Link>
               </Button>
             </div>
-          </div>
+          ) : (
+            <>
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-16 h-16 rounded-2xl bg-secondary-600 flex items-center justify-center text-white font-bold text-2xl shadow-md shadow-secondary-600/20">
+                    <User className="h-8 w-8" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
+                        {user.name}
+                      </h1>
+                      <span className="px-2.5 py-0.5 rounded-full bg-secondary-100 text-secondary-800 text-xs font-bold border border-secondary-200">
+                        Patient
+                      </span>
+                    </div>
+                    <p className="text-xs sm:text-sm text-slate-600 mt-1 font-medium">
+                      {user.email} • Manage your doctor consultations, upcoming visits, and medical history.
+                    </p>
+                  </div>
+                </div>
 
-          {/* Quick Metrics Bar */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-6 border-t border-slate-200/80">
-            <div className="bg-white/80 p-3.5 rounded-2xl border border-slate-200/60 shadow-xs">
-              <span className="text-xs font-semibold text-slate-500 block">Total Consultations</span>
-              <span className="text-2xl font-extrabold text-slate-900 mt-0.5 block">{totalConsultations}</span>
-            </div>
-            <div className="bg-secondary-50/80 p-3.5 rounded-2xl border border-secondary-200/80 shadow-xs">
-              <span className="text-xs font-semibold text-secondary-800 block">Upcoming</span>
-              <span className="text-2xl font-extrabold text-secondary-700 mt-0.5 block">
-                {upcomingAppointments.length}
-              </span>
-            </div>
-            <div className="bg-white/80 p-3.5 rounded-2xl border border-slate-200/60 shadow-xs">
-              <span className="text-xs font-semibold text-slate-500 block">Completed</span>
-              <span className="text-2xl font-extrabold text-slate-900 mt-0.5 block">{completedCount}</span>
-            </div>
-            <div className="bg-white/80 p-3.5 rounded-2xl border border-slate-200/60 shadow-xs">
-              <span className="text-xs font-semibold text-slate-500 block">Cancelled</span>
-              <span className="text-2xl font-extrabold text-slate-900 mt-0.5 block">{cancelledCount}</span>
-            </div>
-          </div>
+                <div className="flex items-center gap-3 shrink-0">
+                  <Button
+                    asChild
+                    className="bg-secondary-600 hover:bg-secondary-700 text-white font-bold shadow-md shadow-secondary-600/20"
+                  >
+                    <Link href="/doctors">
+                      <PlusCircle className="h-4 w-4 mr-2" />
+                      Book New Appointment
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+
+              {/* Quick Metrics Bar */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-6 border-t border-slate-200/80">
+                <div className="bg-white/80 p-3.5 rounded-2xl border border-slate-200/60 shadow-xs">
+                  <span className="text-xs font-semibold text-slate-500 block">Total Consultations</span>
+                  <span className="text-2xl font-extrabold text-slate-900 mt-0.5 block">{totalConsultations}</span>
+                </div>
+                <div className="bg-secondary-50/80 p-3.5 rounded-2xl border border-secondary-200/80 shadow-xs">
+                  <span className="text-xs font-semibold text-secondary-800 block">Upcoming</span>
+                  <span className="text-2xl font-extrabold text-secondary-700 mt-0.5 block">
+                    {upcomingAppointments.length}
+                  </span>
+                </div>
+                <div className="bg-white/80 p-3.5 rounded-2xl border border-slate-200/60 shadow-xs">
+                  <span className="text-xs font-semibold text-slate-500 block">Completed</span>
+                  <span className="text-2xl font-extrabold text-slate-900 mt-0.5 block">{completedCount}</span>
+                </div>
+                <div className="bg-white/80 p-3.5 rounded-2xl border border-slate-200/60 shadow-xs">
+                  <span className="text-xs font-semibold text-slate-500 block">Cancelled</span>
+                  <span className="text-2xl font-extrabold text-slate-900 mt-0.5 block">{cancelledCount}</span>
+                </div>
+              </div>
+            </>
+          )}
         </div>
 
         {/* Navigation Tabs */}
