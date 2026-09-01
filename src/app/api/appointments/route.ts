@@ -40,6 +40,12 @@ export interface AppointmentRecord {
  */
 export async function GET(req: NextRequest) {
   try {
+    const user = await getCurrentUser();
+
+    if (!user) {
+      return errorResponse("Authentication required", 401);
+    }
+
     const { searchParams } = new URL(req.url);
 
     const type = searchParams.get("type") || "upcoming";
@@ -68,6 +74,7 @@ export async function GET(req: NextRequest) {
     if (type === "upcoming") {
       const dbAppointments = await prisma.appointment.findMany({
         where: {
+          patientId: user.id,
           status: "CONFIRMED",
           startTime: {
             gte: new Date(),
@@ -148,6 +155,7 @@ export async function GET(req: NextRequest) {
       const [dbPast, total] = await Promise.all([
         prisma.appointment.findMany({
           where: {
+            patientId: user.id,
             status: {
               in: ["COMPLETED", "CANCELLED"],
             },
@@ -169,6 +177,7 @@ export async function GET(req: NextRequest) {
 
         prisma.appointment.count({
           where: {
+            patientId: user.id,
             status: {
               in: ["COMPLETED", "CANCELLED"],
             },
