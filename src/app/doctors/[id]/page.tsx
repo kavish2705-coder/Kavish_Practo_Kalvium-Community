@@ -1,11 +1,10 @@
 "use client";
 
-import { use, useState } from "react";
+import { use, useState, useEffect } from "react";
 import BookingForm from "@/components/booking/BookingForm";
 import BookingModal from "@/components/booking/BookingModal";
-import { getDoctorById } from "@/lib/mockData";
 import { DoctorCardData } from "@/types";
-import { Star, MapPin, Award, IndianRupee, ArrowLeft } from "lucide-react";
+import { Star, MapPin, Award, IndianRupee, ArrowLeft, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 
@@ -15,17 +14,60 @@ interface PageProps {
 
 export default function DoctorDetailPage({ params }: PageProps) {
   const { id } = use(params);
-  const doctor = getDoctorById(id);
 
+  const [doctor, setDoctor] = useState<DoctorCardData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [modalDoctor, setModalDoctor] = useState<DoctorCardData | null>(null);
+
+  useEffect(() => {
+    let ignore = false;
+
+    async function loadDoctor() {
+      setIsLoading(true);
+      try {
+        const res = await fetch(`/api/doctors?id=${encodeURIComponent(id)}`);
+        if (res.ok) {
+          const json = await res.json();
+          if (!ignore && json.success && Array.isArray(json.data) && json.data.length > 0) {
+            setDoctor(json.data[0]);
+            setIsLoading(false);
+            return;
+          }
+        }
+      } catch (err) {
+        console.error("Failed to load doctor by ID:", err);
+      }
+      if (!ignore) {
+        setDoctor(null);
+        setIsLoading(false);
+      }
+    }
+
+    loadDoctor();
+
+    return () => {
+      ignore = true;
+    };
+  }, [id]);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-50">
+        <div className="text-center">
+          <Loader2 className="h-8 w-8 animate-spin text-secondary-600 mx-auto mb-2" />
+          <p className="text-xs text-slate-600 font-medium">Loading doctor profile...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!doctor) {
     return (
-      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950">
+      <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900">
         <div className="container mx-auto px-4 py-20 text-center flex-1">
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Doctor Not Found</h2>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mb-6">
-            The requested doctor profile does not exist or has been removed.
+          <h2 className="text-2xl font-bold text-slate-900 mb-2">Doctor Not Found</h2>
+          <p className="text-sm text-slate-500 mb-6">
+            The requested doctor profile does not exist in the database or has been removed.
           </p>
           <Button asChild>
             <Link href="/doctors">Browse All Doctors</Link>

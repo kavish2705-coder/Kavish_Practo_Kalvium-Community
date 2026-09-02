@@ -31,6 +31,8 @@ model User {
   doctorProfile DoctorProfile?
   appointmentsAsPatient Appointment[] @relation("PatientAppointments")
   appointmentsAsDoctor  Appointment[] @relation("DoctorAppointments")
+  reviewsAsPatient      Review[]      @relation("PatientReviews")
+  reviewsAsDoctor       Review[]      @relation("DoctorReviews")
 }
 
 model DoctorProfile {
@@ -71,7 +73,22 @@ model Appointment {
 
   patient     User     @relation("PatientAppointments", fields: [patientId], references: [id])
   doctor      User     @relation("DoctorAppointments", fields: [doctorId], references: [id])
+  review      Review?
 
   // CRITICAL: Double-booking prevention at the database level.
   @@unique([doctorId, startTime])
+}
+
+model Review {
+  id            String      @id @default(uuid())
+  appointmentId String      @unique
+  patientId     String
+  doctorId      String
+  rating        Int
+  comment       String?
+  createdAt     DateTime    @default(now())
+
+  appointment   Appointment @relation(fields: [appointmentId], references: [id])
+  patient       User        @relation("PatientReviews", fields: [patientId], references: [id])
+  doctor        User        @relation("DoctorReviews", fields: [doctorId], references: [id])
 }
