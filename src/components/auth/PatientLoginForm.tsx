@@ -5,30 +5,38 @@ import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { Mail, Lock, Eye, EyeOff, Loader2, LogIn } from "lucide-react";
+import type { ApiResponse, SafeUser } from "@/types";
 
 interface PatientLoginFormProps {
   onSwitchToSignup?: () => void;
 }
 
-export default function PatientLoginForm({ onSwitchToSignup }: PatientLoginFormProps) {
+export default function PatientLoginForm({
+  onSwitchToSignup,
+}: PatientLoginFormProps) {
   const router = useRouter();
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [errors, setErrors] = useState<{ emailOrPhone?: string; password?: string }>({});
+  const [errors, setErrors] = useState<{
+    emailOrPhone?: string;
+    password?: string;
+  }>({});
+  const [apiError, setApiError] = useState<string | null>(null);
 
   const validate = () => {
     const newErrors: { emailOrPhone?: string; password?: string } = {};
-    
+
     if (!emailOrPhone.trim()) {
       newErrors.emailOrPhone = "Email or Phone number is required.";
     } else {
       const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailOrPhone);
       const isPhone = /^[0-9]{10}$/.test(emailOrPhone);
       if (!isEmail && !isPhone) {
-        newErrors.emailOrPhone = "Please enter a valid email address or 10-digit mobile number.";
+        newErrors.emailOrPhone =
+          "Please enter a valid email address or 10-digit mobile number.";
       }
     }
 
@@ -47,12 +55,41 @@ export default function PatientLoginForm({ onSwitchToSignup }: PatientLoginFormP
     if (!validate()) return;
 
     setIsLoading(true);
-    // Simulate brief client-side login delay
-    await new Promise((res) => setTimeout(res, 600));
-    setIsLoading(false);
+    setApiError(null);
 
-    // Redirect to patient dashboard
-    router.push("/dashboard/patient");
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: emailOrPhone,
+          password,
+        }),
+      });
+      const payload = (await response.json()) as ApiResponse<SafeUser>;
+
+      if (!response.ok || !payload.success || !payload.data) {
+        const fieldErrors = payload.fieldErrors ?? {};
+        setErrors({
+          emailOrPhone: fieldErrors.email ?? fieldErrors.emailOrPhone,
+          password: fieldErrors.password,
+        });
+        setApiError(payload.error ?? "Unable to log in");
+        return;
+      }
+
+      if (payload.data.role === "DOCTOR") {
+        router.push("/dashboard/doctor");
+      } else if (payload.data.role === "PATIENT") {
+        router.push("/dashboard/patient");
+      } else {
+        setApiError("Your account does not have a supported role.");
+      }
+    } catch {
+      setApiError("Unable to log in. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -84,7 +121,11 @@ export default function PatientLoginForm({ onSwitchToSignup }: PatientLoginFormP
             className="absolute right-3 top-[38px] text-slate-500 hover:text-slate-700 transition-colors focus:outline-none"
             tabIndex={-1}
           >
-            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            {showPassword ? (
+              <EyeOff className="h-4 w-4" />
+            ) : (
+              <Eye className="h-4 w-4" />
+            )}
           </button>
         </div>
       </div>
@@ -108,6 +149,12 @@ export default function PatientLoginForm({ onSwitchToSignup }: PatientLoginFormP
         </button>
       </div>
 
+      {apiError && (
+        <p className="text-sm font-medium text-red-500" role="alert">
+          {apiError}
+        </p>
+      )}
+
       <Button
         type="submit"
         disabled={isLoading}
@@ -121,7 +168,7 @@ export default function PatientLoginForm({ onSwitchToSignup }: PatientLoginFormP
         ) : (
           <>
             <LogIn className="h-4 w-4 mr-2" />
-            Log In as Patient
+            Log In
           </>
         )}
       </Button>
