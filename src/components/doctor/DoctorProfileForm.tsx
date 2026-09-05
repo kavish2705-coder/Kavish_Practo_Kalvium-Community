@@ -26,38 +26,6 @@ export default function DoctorProfileForm() {
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
 
-  async function loadProfile() {
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      const response = await fetch("/api/doctors/profile");
-      const payload = (await response.json()) as ApiResponse<DoctorProfile>;
-
-      if (!response.ok || !payload.success || !payload.data) {
-        const message = payload.error ?? "Unable to load doctor profile";
-        throw new Error(message);
-      }
-
-      setProfile(payload.data);
-      setForm({
-        specialization: payload.data.specialization,
-        qualification: payload.data.qualification,
-        experience: String(payload.data.experience),
-        fee: String(payload.data.fee),
-        clinicInfo: payload.data.clinicInfo,
-      });
-    } catch (loadError) {
-      setError(
-        loadError instanceof Error
-          ? loadError.message
-          : "Unable to load doctor profile",
-      );
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
   useEffect(() => {
     let isActive = true;
 

@@ -31,6 +31,8 @@ export default function DoctorDashboard() {
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [statusError, setStatusError] = useState<string | null>(null);
+  const [updatingId, setUpdatingId] = useState<string | null>(null);
 
   const sortedAppointments = useMemo(
     () =>
@@ -139,6 +141,49 @@ export default function DoctorDashboard() {
     };
   }, []);
 
+  async function updateAppointmentStatus(
+    appointmentId: string,
+    status: "COMPLETED" | "CANCELLED",
+  ) {
+    setUpdatingId(appointmentId);
+    setStatusError(null);
+
+    try {
+      const response = await fetch(
+        `/api/appointments/${encodeURIComponent(appointmentId)}/status`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ status }),
+        },
+      );
+      const payload = (await response.json()) as ApiResponse<{
+        id: string;
+        status: DoctorAppointment["status"];
+      }>;
+
+      if (!response.ok || !payload.success || !payload.data) {
+        throw new Error(payload.error ?? "Unable to update appointment status");
+      }
+
+      setAppointments((current) =>
+        current.map((appointment) =>
+          appointment.id === payload.data?.id
+            ? { ...appointment, status: payload.data.status }
+            : appointment,
+        ),
+      );
+    } catch (updateError) {
+      setStatusError(
+        updateError instanceof Error
+          ? updateError.message
+          : "Unable to update appointment status",
+      );
+    } finally {
+      setUpdatingId(null);
+    }
+  }
+
   return (
     <section className="min-h-screen bg-slate-50/80 px-4 pb-16 pt-28 sm:px-6">
       <div className="mx-auto max-w-6xl">
@@ -205,6 +250,15 @@ export default function DoctorDashboard() {
         </div>
 
         <div className="mt-8">
+          {statusError && (
+            <div
+              className="mb-4 rounded-2xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-800 shadow-sm"
+              role="alert"
+            >
+              {statusError}
+            </div>
+          )}
+
           {isLoading && (
             <div
               className="rounded-2xl border border-slate-200 bg-white/80 p-10 text-center text-slate-600 shadow-sm"
@@ -281,6 +335,42 @@ export default function DoctorDashboard() {
                       </p>
                     )}
                   </div>
+
+                  {appointment.status === "CONFIRMED" && (
+                    <div className="flex flex-wrap gap-2 md:justify-end">
+                      <Button
+                        type="button"
+                        variant="secondary"
+                        size="sm"
+                        onClick={() =>
+                          void updateAppointmentStatus(
+                            appointment.id,
+                            "COMPLETED",
+                          )
+                        }
+                        disabled={updatingId === appointment.id}
+                      >
+                        {updatingId === appointment.id
+                          ? "Updating..."
+                          : "Mark completed"}
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="border-rose-200 text-rose-700 hover:bg-rose-50"
+                        onClick={() =>
+                          void updateAppointmentStatus(
+                            appointment.id,
+                            "CANCELLED",
+                          )
+                        }
+                        disabled={updatingId === appointment.id}
+                      >
+                        Cancel
+                      </Button>
+                    </div>
+                  )}
 
                   <div className="rounded-xl bg-slate-50 px-3 py-2 text-sm text-slate-600">
                     <span className="block text-[10px] font-semibold uppercase tracking-[0.15em] text-slate-500">
