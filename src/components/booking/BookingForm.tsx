@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { bookingFormSchema, BookingFormValues } from "@/lib/validations/booking";
-import { DoctorCardData } from "@/types";
+import { DoctorCardData, SafeUser } from "@/types";
 import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
 import { Textarea } from "@/components/ui/Textarea";
@@ -20,6 +20,7 @@ interface BookingFormProps {
 
 export default function BookingForm({ doctor, onSuccess, onCancel }: BookingFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [user, setUser] = useState<SafeUser | null>(null);
   const defaultDate = format(new Date(), "yyyy-MM-dd");
 
   const {
@@ -44,6 +45,38 @@ export default function BookingForm({ doctor, onSuccess, onCancel }: BookingForm
   });
 
   const [apiError, setApiError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let ignore = false;
+
+    async function fetchAuthUser() {
+      try {
+        const res = await fetch("/api/auth/me");
+        if (res.ok) {
+          const json = await res.json();
+          if (!ignore && json.success && json.data) {
+            const currentUser: SafeUser = json.data;
+            setUser(currentUser);
+            if (currentUser.name) {
+              setValue("patientName", currentUser.name, { shouldValidate: false });
+            }
+            if (currentUser.email) {
+              setValue("patientEmail", currentUser.email, { shouldValidate: false });
+            }
+          }
+        }
+      } catch (err) {
+        console.error("Failed to fetch auth user in BookingForm:", err);
+      }
+    }
+
+    fetchAuthUser();
+
+    return () => {
+      ignore = true;
+    };
+  }, [setValue]);
+
   const selectedDate = useWatch({ control, name: "appointmentDate" }) || defaultDate;
   const selectedStartTime = useWatch({ control, name: "startTime" }) || "";
 
@@ -51,13 +84,22 @@ export default function BookingForm({ doctor, onSuccess, onCancel }: BookingForm
     setIsSubmitting(true);
     setApiError(null);
 
+    if (!user) {
+      setApiError("Authentication required. Please log in as a patient to book an appointment.");
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
       const response = await fetch("/api/appointments", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          ...data,
+          patientId: user.id,
+        }),
       });
 
       if (!response.ok) {
