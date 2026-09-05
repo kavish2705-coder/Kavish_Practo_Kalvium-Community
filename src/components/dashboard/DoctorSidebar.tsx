@@ -3,9 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { 
-  LayoutDashboard, 
-  CalendarDays, 
+import {
+  LayoutDashboard,
+  CalendarDays,
   UserCircle,
   LogOut
 } from "lucide-react";

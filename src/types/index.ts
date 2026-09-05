@@ -38,6 +38,24 @@ export type DoctorAppointment = {
   patientNotes: string | null;
 };
 
+export type DoctorProfile = {
+  id: string;
+  userId: string;
+  specialization: string;
+  qualification: string;
+  experience: number;
+  fee: number;
+  clinicInfo: string;
+};
+
+export type DoctorSchedule = {
+  id: string;
+  dayOfWeek: number;
+  startTime: string;
+  endTime: string;
+  slotDurationMins: number;
+};
+
 // Doctor card data
 export type DoctorCardData = {
   id: string;

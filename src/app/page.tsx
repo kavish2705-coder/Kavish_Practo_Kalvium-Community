@@ -56,17 +56,17 @@ export default function Home() {
       <section className="relative min-h-[90vh] flex items-center">
         {/* The Background Image */}
         <div className="absolute inset-0 z-0">
-          <Image 
-            src="/hero-bg.jpg" 
-            alt="Doctor" 
-            fill 
-            className="object-cover object-left" 
-            priority 
+          <Image
+            src="/hero-bg.jpg"
+            alt="Doctor"
+            fill
+            className="object-cover object-left"
+            priority
           />
         </div>
 
         {/* The smooth blur gradient overlay on the right side */}
-        <div 
+        <div
           className="absolute inset-0 z-10 bg-gradient-to-r from-transparent via-white/50 to-white/95 backdrop-blur-md animate-slow-fade-in-blur"
           style={{
             maskImage: "linear-gradient(to right, transparent 20%, black 60%)",
@@ -81,7 +81,7 @@ export default function Home() {
                 <span className="flex h-2 w-2 rounded-full bg-secondary-500 animate-pulse"></span>
                 Top-rated Doctors Available Now
               </div>
-              
+
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 mb-6 leading-tight">
                 Expert Healthcare,<br/>
                 <span className="text-secondary-600">
@@ -91,7 +91,7 @@ export default function Home() {
               <p className="text-lg text-slate-700 mb-8 max-w-xl ml-auto leading-relaxed">
                 Find the best doctors, view their real-time availability, and book your appointment instantly. No waiting, no double-bookings, just seamless care.
               </p>
-              
+
               <div className="flex flex-col sm:flex-row gap-4 justify-end">
                 <Button size="lg" asChild className="h-12 px-8 text-base shadow-lg shadow-secondary-500/20 bg-secondary-600 hover:bg-secondary-700 text-white border-0">
                   <Link href="/doctors">
@@ -99,9 +99,9 @@ export default function Home() {
                     Find a Doctor
                   </Link>
                 </Button>
-                <Button 
-                  size="lg" 
-                  variant="outline" 
+                <Button
+                  size="lg"
+                  variant="outline"
                   onClick={() => document.getElementById('specialties')?.scrollIntoView({ behavior: 'smooth' })}
                   className="h-12 px-8 text-base bg-white/50 backdrop-blur-sm border-secondary-200 hover:bg-secondary-50"
                 >
@@ -197,7 +197,7 @@ export default function Home() {
         {/* Starry pattern overlay */}
         <div className="absolute inset-0 opacity-30" style={{ backgroundImage: 'radial-gradient(circle at center, #ffffff 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
         <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at center, #ffffff 1.5px, transparent 1.5px)', backgroundSize: '70px 70px', backgroundPosition: '20px 20px' }} />
-        
+
         {/* Nebula / Ambient Glows */}
         <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-purple-400/20 rounded-full blur-[120px] pointer-events-none mix-blend-screen" />
         <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-blue-300/20 rounded-full blur-[140px] pointer-events-none mix-blend-screen" />
@@ -219,7 +219,7 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8 relative">
             {/* Connecting line */}
             <div className="absolute top-1/2 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-y-1/2 hidden md:block" />
-            
+
             {/* Step 1 */}
             <div className="relative p-8 rounded-3xl bg-white/10 backdrop-blur-2xl border border-white/20 text-center shadow-2xl shadow-black/10 hover:-translate-y-2 hover:shadow-white/5 hover:border-white/40 transition-all duration-500 group overflow-hidden">
               <div className="absolute -top-6 -right-6 text-[140px] font-black text-white/5 group-hover:text-white/10 transition-colors pointer-events-none select-none leading-none">
@@ -280,7 +280,7 @@ export default function Home() {
       <footer className="bg-slate-950 pt-20 pb-10 border-t border-slate-800 text-slate-400">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-            
+
             {/* Brand Section */}
             <div className="space-y-4">
               <Link href="/" className="flex items-center gap-2 mb-4">
@@ -351,7 +351,7 @@ export default function Home() {
             </div>
 
           </div>
-          
+
           <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
             <p>© {new Date().getFullYear()} PRACTO. All rights reserved. Built for Sprint 1.</p>
             <div className="flex gap-6">
