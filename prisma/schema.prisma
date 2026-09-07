@@ -33,6 +33,7 @@ model User {
   appointmentsAsDoctor  Appointment[] @relation("DoctorAppointments")
   reviewsAsPatient      Review[]      @relation("PatientReviews")
   reviewsAsDoctor       Review[]      @relation("DoctorReviews")
+  passwordResetTokens   PasswordResetToken[]
 }
 
 model DoctorProfile {
@@ -92,3 +93,17 @@ model Review {
   patient       User        @relation("PatientReviews", fields: [patientId], references: [id])
   doctor        User        @relation("DoctorReviews", fields: [doctorId], references: [id])
 }
+
+model PasswordResetToken {
+  id        String    @id @default(uuid())
+  userId    String
+  tokenHash String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+

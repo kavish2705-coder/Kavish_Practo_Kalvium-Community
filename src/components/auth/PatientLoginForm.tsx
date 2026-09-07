@@ -102,7 +102,7 @@ export default function PatientLoginForm({ onSwitchToSignup }: PatientLoginFormP
         <button
           type="button"
           className="text-secondary-700 font-semibold hover:underline"
-          onClick={() => alert("Password reset link feature coming soon.")}
+          onClick={() => router.push("/forgot-password")}
         >
           Forgot password?
         </button>
