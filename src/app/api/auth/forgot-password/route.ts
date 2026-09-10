@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
         }
       });
       return errorResponse(
-        fieldErrors.email || "Please enter a valid email address.",
+        "Invalid email address.",
         400,
         fieldErrors
       );
