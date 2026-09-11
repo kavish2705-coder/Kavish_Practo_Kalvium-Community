@@ -4,32 +4,47 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
-import { Mail, Lock, Eye, EyeOff, Loader2, LogIn, AlertCircle } from "lucide-react";
+import {
+  Mail,
+  Lock,
+  Eye,
+  EyeOff,
+  Loader2,
+  LogIn,
+  AlertCircle,
+} from "lucide-react";
+import type { ApiResponse, SafeUser } from "@/types";
 
 interface PatientLoginFormProps {
   onSwitchToSignup?: () => void;
 }
 
-export default function PatientLoginForm({ onSwitchToSignup }: PatientLoginFormProps) {
+export default function PatientLoginForm({
+  onSwitchToSignup,
+}: PatientLoginFormProps) {
   const router = useRouter();
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [formError, setFormError] = useState<string | null>(null);
-  const [errors, setErrors] = useState<{ emailOrPhone?: string; password?: string }>({});
+  const [errors, setErrors] = useState<{
+    emailOrPhone?: string;
+    password?: string;
+  }>({});
+  const [apiError, setApiError] = useState<string | null>(null);
 
   const validate = () => {
     const newErrors: { emailOrPhone?: string; password?: string } = {};
-    
+
     if (!emailOrPhone.trim()) {
       newErrors.emailOrPhone = "Email or Phone number is required.";
     } else {
       const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailOrPhone);
       const isPhone = /^[0-9]{10}$/.test(emailOrPhone);
       if (!isEmail && !isPhone) {
-        newErrors.emailOrPhone = "Please enter a valid email address or 10-digit mobile number.";
+        newErrors.emailOrPhone =
+          "Please enter a valid email address or 10-digit mobile number.";
       }
     }
 
@@ -48,10 +63,10 @@ export default function PatientLoginForm({ onSwitchToSignup }: PatientLoginFormP
     if (!validate()) return;
 
     setIsLoading(true);
-    setFormError(null);
+    setApiError(null);
 
     try {
-      const res = await fetch("/api/auth/login", {
+      const response = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -59,20 +74,30 @@ export default function PatientLoginForm({ onSwitchToSignup }: PatientLoginFormP
           password,
         }),
       });
+      const payload = (await response.json()) as ApiResponse<SafeUser>;
 
-      const data = await res.json().catch(() => ({}));
-
-      if (!res.ok || !data.success) {
-        setFormError(data.error || "Invalid email or password.");
-        setIsLoading(false);
+      if (!response.ok || !payload.success || !payload.data) {
+        const fieldErrors = payload.fieldErrors ?? {};
+        setErrors({
+          emailOrPhone: fieldErrors.email ?? fieldErrors.emailOrPhone,
+          password: fieldErrors.password,
+        });
+        setApiError(payload.error ?? "Invalid email or password.");
         return;
       }
 
-      router.push("/dashboard/patient");
-      router.refresh();
-    } catch (err) {
-      console.error("Login failed:", err);
-      setFormError("An unexpected error occurred. Please try again.");
+      if (payload.data.role === "DOCTOR") {
+        router.push("/dashboard/doctor");
+        router.refresh();
+      } else if (payload.data.role === "PATIENT") {
+        router.push("/dashboard/patient");
+        router.refresh();
+      } else {
+        setApiError("Your account does not have a supported role.");
+      }
+    } catch {
+      setApiError("Unable to log in. Please try again.");
+    } finally {
       setIsLoading(false);
     }
   };
@@ -106,7 +131,11 @@ export default function PatientLoginForm({ onSwitchToSignup }: PatientLoginFormP
             className="absolute right-3 top-[38px] text-slate-500 hover:text-slate-700 transition-colors focus:outline-none"
             tabIndex={-1}
           >
-            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            {showPassword ? (
+              <EyeOff className="h-4 w-4" />
+            ) : (
+              <Eye className="h-4 w-4" />
+            )}
           </button>
         </div>
       </div>
@@ -130,10 +159,13 @@ export default function PatientLoginForm({ onSwitchToSignup }: PatientLoginFormP
         </button>
       </div>
 
-      {formError && (
-        <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-xs font-semibold text-rose-700 flex items-center gap-2">
+      {apiError && (
+        <div
+          className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-xs font-semibold text-rose-700 flex items-center gap-2"
+          role="alert"
+        >
           <AlertCircle className="h-4 w-4 text-rose-600 shrink-0" />
-          <span>{formError}</span>
+          <span>{apiError}</span>
         </div>
       )}
 
@@ -150,7 +182,7 @@ export default function PatientLoginForm({ onSwitchToSignup }: PatientLoginFormP
         ) : (
           <>
             <LogIn className="h-4 w-4 mr-2" />
-            Log In as Patient
+            Log In
           </>
         )}
       </Button>

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 
@@ -18,9 +19,7 @@ export default function Navbar() {
     <header className="fixed top-0 z-50 w-full bg-white/20 backdrop-blur-md border-b border-white/30">
       <div className="container mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 drop-shadow-sm group">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-secondary-500 to-secondary-600 flex items-center justify-center text-white font-bold text-lg shadow-md group-hover:scale-105 transition-transform">
-            P
-          </div>
+          <Image src="/logo.png" alt="Practo Logo" width={40} height={40} className="w-10 h-10 object-contain group-hover:scale-105 transition-transform" />
           <span className="font-extrabold text-xl hidden sm:inline-block text-slate-900 group-hover:text-secondary-700 transition-colors">
             PRACTO
           </span>

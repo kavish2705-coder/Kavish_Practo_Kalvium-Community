@@ -1,4 +1,4 @@
-# Practo Clone - Medical Consultancy Platform 🏥
+# Practo - Medical Consultancy Platform 🏥
 
 A full-stack medical consultancy platform inspired by Practo, built for Sprint 1.
 
