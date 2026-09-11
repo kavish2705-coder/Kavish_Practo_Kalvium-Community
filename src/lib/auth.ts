@@ -11,7 +11,13 @@ async function getSessionSecret() {
   const secret = process.env.NEXTAUTH_SECRET;
 
   if (!secret) {
-    throw new Error("NEXTAUTH_SECRET is not configured");
+    if (process.env.NODE_ENV === "production") {
+      throw new Error("NEXTAUTH_SECRET is not configured");
+    }
+    // Fallback secret for development/testing environments
+    const fallback = "dev-secret";
+    console.warn("NEXTAUTH_SECRET not configured, using fallback secret for dev.");
+    return new TextEncoder().encode(fallback);
   }
 
   return new TextEncoder().encode(secret);

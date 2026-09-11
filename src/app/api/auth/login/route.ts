@@ -40,7 +40,16 @@ export async function POST(request: Request) {
       },
     });
 
-    if (!user || !(await bcrypt.compare(password, user.passwordHash))) {
+    if (!user) {
+      return errorResponse("Invalid email or password", 401);
+    }
+    try {
+      const passwordMatch = await bcrypt.compare(password, user.passwordHash);
+      if (!passwordMatch) {
+        return errorResponse("Invalid email or password", 401);
+      }
+    } catch (e) {
+      console.error('[LoginAPI] bcrypt compare error:', e);
       return errorResponse("Invalid email or password", 401);
     }
 
@@ -57,7 +66,8 @@ export async function POST(request: Request) {
       sessionCookieOptions(),
     );
     return response;
-  } catch {
+  } catch (e) {
+    console.error('[LoginAPI] Unexpected error:', e);
     return errorResponse("Unable to authenticate", 500);
   }
 }
