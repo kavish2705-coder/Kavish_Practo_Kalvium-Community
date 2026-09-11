@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
-import { Mail, Lock, Eye, EyeOff, Loader2, LogIn } from "lucide-react";
+import { Mail, Lock, Eye, EyeOff, Loader2, LogIn, AlertCircle } from "lucide-react";
 
 interface PatientLoginFormProps {
   onSwitchToSignup?: () => void;
@@ -17,6 +17,7 @@ export default function PatientLoginForm({ onSwitchToSignup }: PatientLoginFormP
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
   const [errors, setErrors] = useState<{ emailOrPhone?: string; password?: string }>({});
 
   const validate = () => {
@@ -47,12 +48,33 @@ export default function PatientLoginForm({ onSwitchToSignup }: PatientLoginFormP
     if (!validate()) return;
 
     setIsLoading(true);
-    // Simulate brief client-side login delay
-    await new Promise((res) => setTimeout(res, 600));
-    setIsLoading(false);
+    setFormError(null);
 
-    // Redirect to patient dashboard
-    router.push("/dashboard/patient");
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: emailOrPhone.trim().toLowerCase(),
+          password,
+        }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data.success) {
+        setFormError(data.error || "Invalid email or password.");
+        setIsLoading(false);
+        return;
+      }
+
+      router.push("/dashboard/patient");
+      router.refresh();
+    } catch (err) {
+      console.error("Login failed:", err);
+      setFormError("An unexpected error occurred. Please try again.");
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -107,6 +129,13 @@ export default function PatientLoginForm({ onSwitchToSignup }: PatientLoginFormP
           Forgot password?
         </button>
       </div>
+
+      {formError && (
+        <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-xs font-semibold text-rose-700 flex items-center gap-2">
+          <AlertCircle className="h-4 w-4 text-rose-600 shrink-0" />
+          <span>{formError}</span>
+        </div>
+      )}
 
       <Button
         type="submit"
