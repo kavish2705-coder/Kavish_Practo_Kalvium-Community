@@ -1,0 +1,15 @@
+Dockerfile
+.dockerignore
+node_modules
+npm-debug.log
+README.md
+.next
+.git
+.env
+.env.*
+.windsurf
+.vscode
+.claude
+.agents
+AGENTS.md
+CLAUDE.md
