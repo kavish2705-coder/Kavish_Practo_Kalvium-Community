@@ -1,6 +1,6 @@
 # Practo - Medical Consultancy Platform 🏥
 
-🔗 **Live Demo:** [https://kavish-practo-kalvium-community-2bpi9gn3v.vercel.app/](https://kavish-practo-kalvium-community-2bpi9gn3v.vercel.app/)
+🔗 **Live Demo:** https://kavish-practo-kalvium-community.vercel.app/
 
 A full-stack medical consultancy platform inspired by Practo, built for Sprint 1.
 
