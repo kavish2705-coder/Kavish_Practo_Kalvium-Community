@@ -1,17 +1,19 @@
 import bcrypt from "bcryptjs";
-import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient, Role } from "@prisma/client";
+import { Pool } from "pg";
+import { PrismaPg } from "@prisma/adapter-pg";
 import { MOCK_DOCTORS } from "../src/lib/mockData";
 import "dotenv/config";
 
 const connectionString = process.env.DATABASE_URL;
+
 if (!connectionString) {
   throw new Error("DATABASE_URL is not configured in .env");
 }
 
-const prisma = new PrismaClient({
-  adapter: new PrismaPg({ connectionString }),
-});
+const pool = new Pool({ connectionString });
+const adapter = new PrismaPg(pool);
+const prisma = new PrismaClient({ adapter });
 
 async function main() {
   console.log("🌱 Seeding database...");
@@ -39,6 +41,7 @@ async function main() {
         name: doc.name,
       },
       create: {
+        id: doc.id,
         email: doc.email,
         name: doc.name,
         role: Role.DOCTOR,
@@ -65,8 +68,8 @@ async function main() {
       },
     });
 
-    // Seed default schedules for Monday through Friday (1 to 5)
-    for (let day = 1; day <= 5; day++) {
+    // Seed default schedules for Sunday through Saturday (0 to 6)
+    for (let day = 0; day <= 6; day++) {
       await prisma.schedule.upsert({
         where: {
           doctorId_dayOfWeek: {

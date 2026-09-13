@@ -2,16 +2,29 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 
-export default function Navbar() {
+import type { SafeUser } from "@/types";
+
+export default function Navbar({ user }: { user?: SafeUser | null }) {
   const pathname = usePathname();
+  const router = useRouter();
 
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     if (pathname === "/") {
       e.preventDefault();
       document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+      router.push("/");
+      router.refresh();
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -46,28 +59,25 @@ export default function Navbar() {
         </nav>
         
         <div className="flex items-center gap-4">
-          {/* 
-            ==========================================================================
-            LOGIN PAGE IMPLEMENTATION PLAN (Triggered on 'Log in' click)
-            ==========================================================================
-            1. Navigation / Modal Trigger:
-               - On click, trigger open state for <LoginModal /> or route to '/login?redirect=...'.
-            2. User Login Form & Authentication Flow:
-               - Collect user Phone Number / Email and Password or 6-digit OTP.
-               - Submit credentials to backend endpoint `/api/auth/login`.
-            3. Session Context & State Management:
-               - Store authenticated session in AuthContext and secure HttpOnly cookie.
-               - Swap this 'Log in' button with <UserNav /> displaying user initials & avatar dropdown.
-            4. Post-Login Redirection:
-               - Redirect back to active flow (e.g. Doctor Booking modal) or Patient Dashboard.
-            ==========================================================================
-          */}
-          <Button asChild variant="ghost" className="hidden sm:inline-flex font-bold text-slate-800 hover:bg-white/60 bg-white/30 backdrop-blur-sm border border-white/40 shadow-sm">
-            <Link href="/login">Log in</Link>
-          </Button>
-          <Button asChild className="font-bold shadow-lg shadow-secondary-500/30 bg-secondary-600 hover:bg-secondary-700 text-white">
-            <Link href="/doctors">Book Appointment</Link>
-          </Button>
+          {user ? (
+            <>
+              <Button asChild variant="ghost" className="hidden sm:inline-flex font-bold text-slate-800 hover:bg-white/60 bg-white/30 backdrop-blur-sm border border-white/40 shadow-sm">
+                <Link href={user.role === "DOCTOR" ? "/dashboard/doctor" : "/dashboard/patient"}>Dashboard</Link>
+              </Button>
+              <Button onClick={handleLogout} className="font-bold shadow-lg shadow-secondary-500/30 bg-slate-800 hover:bg-slate-900 text-white">
+                Log out
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button asChild variant="ghost" className="hidden sm:inline-flex font-bold text-slate-800 hover:bg-white/60 bg-white/30 backdrop-blur-sm border border-white/40 shadow-sm">
+                <Link href="/login">Log in</Link>
+              </Button>
+              <Button asChild className="font-bold shadow-lg shadow-secondary-500/30 bg-secondary-600 hover:bg-secondary-700 text-white">
+                <Link href="/doctors">Book Appointment</Link>
+              </Button>
+            </>
+          )}
         </div>
       </div>
     </header>

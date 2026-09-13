@@ -77,12 +77,37 @@ export default function PatientSignupForm({ onSwitchToLogin }: PatientSignupForm
     if (!validate()) return;
 
     setIsLoading(true);
-    // Simulate brief client-side signup delay
-    await new Promise((res) => setTimeout(res, 600));
-    setIsLoading(false);
+    setErrors({});
 
-    // Redirect to patient dashboard
-    router.push("/dashboard/patient");
+    try {
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          password,
+          name: fullName,
+        }),
+      });
+
+      const payload = await response.json();
+
+      if (!response.ok || !payload.success) {
+        setErrors({ 
+          email: payload.error || "Failed to create account. Please try again." 
+        });
+        return;
+      }
+
+      // Success - Redirect to patient dashboard
+      router.push("/dashboard/patient");
+    } catch (err) {
+      setErrors({ 
+        email: "A network error occurred. Please try again." 
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

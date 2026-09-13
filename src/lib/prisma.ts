@@ -1,3 +1,4 @@
+import { Pool } from "pg";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "@prisma/client";
 
@@ -12,11 +13,9 @@ function createPrismaClient(): PrismaClient {
     throw new Error("DATABASE_URL is not configured");
   }
 
-  return new PrismaClient({
-    adapter: new PrismaPg({
-      connectionString,
-    }),
-  });
+  const pool = new Pool({ connectionString });
+  const adapter = new PrismaPg(pool);
+  return new PrismaClient({ adapter });
 }
 
 export const prisma =
