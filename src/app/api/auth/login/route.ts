@@ -41,7 +41,8 @@ export async function POST(request: Request) {
           passwordHash: true,
         },
       });
-    } catch (dbError: any) {
+    } catch (err: unknown) {
+      const dbError = err as Error & { code?: string };
       if (dbError.code === 'ECONNREFUSED' || dbError.message?.includes('ECONNREFUSED') || dbError.code?.startsWith('P')) {
         console.warn('[LoginAPI] DB connection failed, using mock fallback user.');
         // Allow fallback login with 'password' for testing when DB is down

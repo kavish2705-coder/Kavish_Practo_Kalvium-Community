@@ -13,15 +13,19 @@ export const metadata: Metadata = {
   description: "Book appointments with top-rated doctors effortlessly.",
 };
 
-export default function RootLayout({
+import { getCurrentUser } from "@/lib/auth";
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const user = await getCurrentUser();
+
   return (
     <html lang="en">
       <body className={`${outfit.variable} antialiased min-h-screen flex flex-col`}>
-        <Navbar />
+        <Navbar user={user} />
         <main className="flex-1">
           {children}
         </main>
