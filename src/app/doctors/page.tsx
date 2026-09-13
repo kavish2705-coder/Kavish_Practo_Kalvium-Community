@@ -46,7 +46,9 @@ function DoctorsContent() {
 
       const queryString = params.toString();
       const newPath = queryString ? `${pathname}?${queryString}` : pathname;
-      router.push(newPath, { scroll: false });
+      setTimeout(() => {
+        router.push(newPath, { scroll: false });
+      }, 0);
     },
     [pathname, router],
   );
@@ -119,11 +121,9 @@ function DoctorsContent() {
   }, [filters]);
 
   const handleFilterChange = (newFilters: Partial<DoctorFilterState>) => {
-    setFilters((prev) => {
-      const updated = { ...prev, ...newFilters };
-      updateUrlParams(updated);
-      return updated;
-    });
+    const updated = { ...filters, ...newFilters };
+    setFilters(updated);
+    updateUrlParams(updated);
   };
 
   const handleReset = () => {
