@@ -22,6 +22,7 @@ import {
   AlertCircle,
   Info,
   ShieldCheck,
+  LogOut,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
@@ -142,6 +143,11 @@ export default function PatientDashboardPage() {
           const json = await res.json();
           if (!ignore && json.success && json.data) {
             const currentUser: SafeUser = json.data;
+            if (currentUser.role !== "PATIENT") {
+              setUser(null);
+              setIsLoadingUser(false);
+              return;
+            }
             setUser(currentUser);
             setEditName(currentUser.name);
             setIsLoadingUser(false);
@@ -168,6 +174,17 @@ export default function PatientDashboardPage() {
       ignore = true;
     };
   }, [fetchReviews]);
+
+  // Handle user logout
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+    } catch (err) {
+      console.error("Failed to log out:", err);
+    } finally {
+      setUser(null);
+    }
+  };
 
   // Refresh upcoming
   const handleRefreshUpcoming = async () => {
@@ -350,6 +367,15 @@ export default function PatientDashboardPage() {
                       <PlusCircle className="h-4 w-4 mr-2" />
                       Book New Appointment
                     </Link>
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={handleLogout}
+                    className="text-xs font-semibold text-rose-600 hover:bg-rose-50 border-rose-200"
+                  >
+                    <LogOut className="h-4 w-4 mr-1.5" />
+                    Log Out
                   </Button>
                 </div>
               </div>

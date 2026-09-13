@@ -4,7 +4,15 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
-import { Mail, Lock, Eye, EyeOff, Loader2, LogIn } from "lucide-react";
+import {
+  Mail,
+  Lock,
+  Eye,
+  EyeOff,
+  Loader2,
+  LogIn,
+  AlertCircle,
+} from "lucide-react";
 import type { ApiResponse, SafeUser } from "@/types";
 
 interface PatientLoginFormProps {
@@ -62,7 +70,7 @@ export default function PatientLoginForm({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          email: emailOrPhone,
+          email: emailOrPhone.trim().toLowerCase(),
           password,
         }),
       });
@@ -74,14 +82,16 @@ export default function PatientLoginForm({
           emailOrPhone: fieldErrors.email ?? fieldErrors.emailOrPhone,
           password: fieldErrors.password,
         });
-        setApiError(payload.error ?? "Unable to log in");
+        setApiError(payload.error ?? "Invalid email or password.");
         return;
       }
 
       if (payload.data.role === "DOCTOR") {
         router.push("/dashboard/doctor");
+        router.refresh();
       } else if (payload.data.role === "PATIENT") {
         router.push("/dashboard/patient");
+        router.refresh();
       } else {
         setApiError("Your account does not have a supported role.");
       }
@@ -150,9 +160,13 @@ export default function PatientLoginForm({
       </div>
 
       {apiError && (
-        <p className="text-sm font-medium text-red-500" role="alert">
-          {apiError}
-        </p>
+        <div
+          className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-xs font-semibold text-rose-700 flex items-center gap-2"
+          role="alert"
+        >
+          <AlertCircle className="h-4 w-4 text-rose-600 shrink-0" />
+          <span>{apiError}</span>
+        </div>
       )}
 
       <Button
