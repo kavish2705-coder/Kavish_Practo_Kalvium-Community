@@ -12,7 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      DATABASE_URL: "postgresql://dummy:dummy@localhost:5432/dummy"
+      NEXTAUTH_SECRET: "dummy_secret_for_build"
 
     steps:
       - name: Checkout repository
