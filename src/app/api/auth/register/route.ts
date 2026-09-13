@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+// removed unused NextResponse import
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 import { errorResponse, successResponse } from "@/lib/apiResponse";
@@ -59,7 +59,7 @@ export async function POST(request: Request) {
 
     return response;
 
-  } catch (error: any) {
+  } catch (error) {
     console.error("[RegisterAPI] Error:", error);
     return errorResponse("Failed to register user", 500);
   }

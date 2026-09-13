@@ -101,7 +101,7 @@ export default function PatientSignupForm({ onSwitchToLogin }: PatientSignupForm
 
       // Success - Redirect to patient dashboard
       router.push("/dashboard/patient");
-    } catch (err) {
+    } catch {
       setErrors({ 
         email: "A network error occurred. Please try again." 
       });
