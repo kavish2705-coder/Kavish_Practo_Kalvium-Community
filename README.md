@@ -1,5 +1,7 @@
 # Practo - Medical Consultancy Platform 🏥
 
+🔗 **Live Demo:** [https://kavish-practo-kalvium-community-2bpi9gn3v.vercel.app/](https://kavish-practo-kalvium-community-2bpi9gn3v.vercel.app/)
+
 A full-stack medical consultancy platform inspired by Practo, built for Sprint 1.
 
 ## 👥 The Team
@@ -12,7 +14,7 @@ A full-stack medical consultancy platform inspired by Practo, built for Sprint 1
 - **Database**: PostgreSQL
 - **ORM**: Prisma
 - **CI/CD**: GitHub Actions (Configured in `.github/workflows/ci.yml`)
-- **Cloud/Hosting**: Google Cloud Platform (GCP)
+- **Cloud/Hosting**: Vercel (Frontend & APIs) + Supabase (PostgreSQL)
 - **Styling**: Tailwind CSS & Glassmorphism UI
 - **Validation**: Zod + React Hook Form
 
