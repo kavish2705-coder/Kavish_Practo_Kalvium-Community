@@ -64,13 +64,7 @@ export default function Navbar({ user }: { user?: SafeUser | null }) {
             href="/admin" 
             className="hover:text-secondary-700 transition-colors drop-shadow-sm font-bold text-secondary-600"
           >
-            For Providers
-          </Link>
-          <Link 
-            href="/admin" 
-            className="hover:text-secondary-700 transition-colors drop-shadow-sm font-bold text-slate-500"
-          >
-            Admin Portal
+            For Doctors & Admins
           </Link>
         </nav>
         
