@@ -38,6 +38,7 @@ export default function SlotPicker({
 
   const [slots, setSlots] = useState<TimeSlot[]>([]);
   const [isLoadingSlots, setIsLoadingSlots] = useState(false);
+  const [fetchError, setFetchError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!activeDate || !doctorId) return;
@@ -49,15 +50,21 @@ export default function SlotPicker({
     fetch(`/api/doctors/slots?doctorId=${doctorId}&date=${activeDate}`)
       .then((res) => res.json())
       .then((payload) => {
-        if (isMounted && payload.success && payload.data) {
-          setSlots(payload.data);
+        if (isMounted) {
+          if (payload.success && payload.data) {
+            setSlots(payload.data);
+            setFetchError(null);
+          } else {
+            setSlots([]);
+            setFetchError(payload.error || "Failed to load slots");
+          }
         }
       })
       .catch((err) => {
         console.error("Failed to fetch slots:", err);
-        // Fallback to mock data if API fails
         if (isMounted) {
-          setSlots(getMockSlotsForDate(doctorId, activeDate));
+          setSlots([]);
+          setFetchError("Network error. Please try again.");
         }
       })
       .finally(() => {
@@ -123,6 +130,10 @@ export default function SlotPicker({
         {isLoadingSlots ? (
           <div className="p-4 rounded-xl bg-slate-100 text-slate-600 text-xs text-center border border-slate-200">
             Loading available slots...
+          </div>
+        ) : fetchError ? (
+          <div className="p-4 rounded-xl bg-red-50 text-red-600 text-xs text-center border border-red-200">
+            {fetchError}
           </div>
         ) : slots.length === 0 ? (
           <div className="p-4 rounded-xl bg-slate-100 text-slate-600 text-xs text-center border border-slate-200">

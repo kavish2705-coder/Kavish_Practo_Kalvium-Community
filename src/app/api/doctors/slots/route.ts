@@ -64,7 +64,7 @@ export async function GET(request: Request) {
       generateAvailableSlots(schedule, date, bookedStartTimes),
     );
   } catch (err: unknown) {
-    console.warn("GET /api/doctors/slots fallback to mock slots:", err);
-    return successResponse(getMockSlotsForDate(doctorId, dateValue));
+    console.error("GET /api/doctors/slots DB error:", err);
+    return errorResponse("Failed to fetch slots. Database error.", 500);
   }
 }
