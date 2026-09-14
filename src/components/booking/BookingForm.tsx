@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/Button";
 import SlotPicker from "./SlotPicker";
 import { User, Mail, Phone, IndianRupee, Loader2, CheckCircle2, UserCheck } from "lucide-react";
 import { generateRefId } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 interface BookingFormProps {
   doctor: DoctorCardData;
@@ -21,6 +22,7 @@ interface BookingFormProps {
 export default function BookingForm({ doctor, onSuccess, onCancel }: BookingFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [user, setUser] = useState<SafeUser | null>(null);
+  const router = useRouter();
   const defaultDate = format(new Date(), "yyyy-MM-dd");
 
   const {
@@ -85,8 +87,7 @@ export default function BookingForm({ doctor, onSuccess, onCancel }: BookingForm
     setApiError(null);
 
     if (!user) {
-      setApiError("Authentication required. Please log in as a patient to book an appointment.");
-      setIsSubmitting(false);
+      router.push("/login");
       return;
     }
 
