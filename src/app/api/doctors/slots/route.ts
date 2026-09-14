@@ -51,7 +51,7 @@ export async function GET(request: Request) {
     const appointments = await prisma.appointment.findMany({
       where: {
         doctorId,
-        status: "CONFIRMED",
+        status: { not: "CANCELLED" },
         startTime: { gte: start, lt: end },
       },
       select: { startTime: true },
