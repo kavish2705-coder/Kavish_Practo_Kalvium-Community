@@ -1,7 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { format, addDays } from "date-fns";
 import { TimeSlot } from "@/types";
-import { getMockSlotsForDate } from "@/lib/mockData";
 import { Calendar as CalendarIcon, Clock, AlertCircle } from "lucide-react";
 
 interface SlotPickerProps {
