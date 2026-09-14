@@ -56,6 +56,22 @@ export default function Navbar({ user }: { user?: SafeUser | null }) {
           >
             How It Works
           </Link>
+
+          {/* Dedicated Provider/Admin Access Links */}
+          <div className="w-px h-4 bg-slate-300 mx-2 hidden lg:block"></div>
+          
+          <Link 
+            href="/login" 
+            className="hover:text-secondary-700 transition-colors drop-shadow-sm font-bold text-secondary-600"
+          >
+            For Providers
+          </Link>
+          <Link 
+            href="/admin" 
+            className="hover:text-secondary-700 transition-colors drop-shadow-sm font-bold text-slate-500"
+          >
+            Admin Portal
+          </Link>
         </nav>
         
         <div className="flex items-center gap-4">
