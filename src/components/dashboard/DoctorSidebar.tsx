@@ -26,7 +26,7 @@ export function DoctorSidebar() {
       <div className="flex h-16 shrink-0 items-center px-6 border-b border-slate-100">
         <Link href="/" className="flex items-center gap-2">
           <Image src="/logo.png" alt="Practo Logo" width={32} height={32} className="w-8 h-8 object-contain" />
-          <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-700 to-primary-500 tracking-tight">
+          <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-secondary-700 to-secondary-500 tracking-tight">
             PRACTO<span className="text-slate-800 text-sm ml-1 font-medium hidden sm:inline-block">Doctor</span>
           </span>
         </Link>
@@ -46,14 +46,14 @@ export function DoctorSidebar() {
               className={cn(
                 "group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition-all duration-200",
                 isActive
-                  ? "bg-primary-50 text-primary-700"
+                  ? "bg-secondary-50 text-secondary-700"
                   : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
               )}
             >
               <item.icon
                 className={cn(
                   "h-5 w-5 shrink-0 transition-colors",
-                  isActive ? "text-primary-600" : "text-slate-400 group-hover:text-slate-600"
+                  isActive ? "text-secondary-600" : "text-slate-400 group-hover:text-slate-600"
                 )}
               />
               {item.name}

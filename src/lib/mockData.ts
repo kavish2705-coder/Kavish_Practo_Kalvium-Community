@@ -184,7 +184,7 @@ export function getMockSlotsForDate(doctorId: string, dateStr: string): TimeSlot
     { start: "19:00", end: "19:30", isBooked: true },
   ];
 
-  const baseDate = dateStr ? new Date(dateStr) : new Date();
+  const baseDate = dateStr ? new Date(`${dateStr}T00:00:00`) : new Date();
 
   return times.map((t) => {
     const [startH, startM] = t.start.split(":").map(Number);

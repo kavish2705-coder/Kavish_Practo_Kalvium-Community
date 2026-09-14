@@ -47,7 +47,8 @@ export default function DoctorDashboard() {
     setError(null);
 
     try {
-      const response = await fetch("/api/doctors/appointments");
+      const todayStr = new Intl.DateTimeFormat('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+      const response = await fetch(`/api/doctors/appointments?date=${todayStr}`);
       const payload = (await response.json()) as ApiResponse<
         AppointmentPayload[]
       >;
@@ -92,7 +93,8 @@ export default function DoctorDashboard() {
       setError(null);
 
       try {
-        const response = await fetch("/api/doctors/appointments");
+        const todayStr = new Intl.DateTimeFormat('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+        const response = await fetch(`/api/doctors/appointments?date=${todayStr}`);
         const payload = (await response.json()) as ApiResponse<
           AppointmentPayload[]
         >;

@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { format, addDays } from "date-fns";
 import { TimeSlot } from "@/types";
 import { getMockSlotsForDate } from "@/lib/mockData";
@@ -36,9 +36,36 @@ export default function SlotPicker({
 
   const activeDate = selectedDate || upcomingDays[0].dateStr;
 
-  const slots: TimeSlot[] = useMemo(() => {
-    if (!activeDate || !doctorId) return [];
-    return getMockSlotsForDate(doctorId, activeDate);
+  const [slots, setSlots] = useState<TimeSlot[]>([]);
+  const [isLoadingSlots, setIsLoadingSlots] = useState(false);
+
+  useEffect(() => {
+    if (!activeDate || !doctorId) return;
+
+    let isMounted = true;
+    setIsLoadingSlots(true);
+
+    fetch(`/api/doctors/slots?doctorId=${doctorId}&date=${activeDate}`)
+      .then((res) => res.json())
+      .then((payload) => {
+        if (isMounted && payload.success && payload.data) {
+          setSlots(payload.data);
+        }
+      })
+      .catch((err) => {
+        console.error("Failed to fetch slots:", err);
+        // Fallback to mock data if API fails
+        if (isMounted) {
+          setSlots(getMockSlotsForDate(doctorId, activeDate));
+        }
+      })
+      .finally(() => {
+        if (isMounted) setIsLoadingSlots(false);
+      });
+
+    return () => {
+      isMounted = false;
+    };
   }, [activeDate, doctorId]);
 
   const morningSlots = slots.filter(
@@ -92,9 +119,13 @@ export default function SlotPicker({
           Select Time Slot
         </label>
 
-        {slots.length === 0 ? (
+        {isLoadingSlots ? (
           <div className="p-4 rounded-xl bg-slate-100 text-slate-600 text-xs text-center border border-slate-200">
             Loading available slots...
+          </div>
+        ) : slots.length === 0 ? (
+          <div className="p-4 rounded-xl bg-slate-100 text-slate-600 text-xs text-center border border-slate-200">
+            No slots available for this date.
           </div>
         ) : (
           <div className="space-y-4 bg-slate-100/70 p-4 rounded-2xl border border-slate-200/80">
