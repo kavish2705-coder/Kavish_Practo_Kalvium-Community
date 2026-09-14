@@ -35,7 +35,7 @@ export default function AdminLoginPage() {
           </div>
 
           <div className="bg-white rounded-xl p-4 sm:p-6 shadow-inner">
-            <PatientLoginForm />
+            <PatientLoginForm emailPlaceholder="e.g. doctor@example.com or 9876543210" />
           </div>
         </div>
       </div>

@@ -17,10 +17,12 @@ import type { ApiResponse, SafeUser } from "@/types";
 
 interface PatientLoginFormProps {
   onSwitchToSignup?: () => void;
+  emailPlaceholder?: string;
 }
 
 export default function PatientLoginForm({
   onSwitchToSignup,
+  emailPlaceholder = "e.g. patient@example.com or 9876543210",
 }: PatientLoginFormProps) {
   const router = useRouter();
   const [emailOrPhone, setEmailOrPhone] = useState("");
@@ -107,7 +109,7 @@ export default function PatientLoginForm({
       <Input
         label="Email address or Phone number"
         type="text"
-        placeholder="e.g. patient@example.com or 9876543210"
+        placeholder={emailPlaceholder}
         value={emailOrPhone}
         onChange={(e) => setEmailOrPhone(e.target.value)}
         icon={<Mail className="h-4 w-4 text-slate-500" />}
