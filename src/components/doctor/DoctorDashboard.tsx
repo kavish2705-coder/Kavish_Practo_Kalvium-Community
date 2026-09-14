@@ -185,7 +185,7 @@ export default function DoctorDashboard() {
   }
 
   return (
-    <section className="min-h-screen bg-slate-50/80 px-4 pb-16 pt-28 sm:px-6">
+    <section className="min-h-screen bg-gradient-to-br from-slate-50 via-secondary-50/30 to-slate-100/50 px-4 pb-16 pt-28 sm:px-6">
       <div className="mx-auto max-w-6xl">
         <div className="mb-8">
           <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-secondary-600">
@@ -217,7 +217,7 @@ export default function DoctorDashboard() {
         <DoctorWorkspaceNav />
 
         <div className="grid gap-4 md:grid-cols-3">
-          <div className="rounded-2xl border border-slate-200 bg-white/80 p-4 shadow-sm backdrop-blur-sm">
+          <div className="glass-card rounded-2xl p-6 border border-white/60 bg-white/70 backdrop-blur-md">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
               Total
             </p>
@@ -225,7 +225,7 @@ export default function DoctorDashboard() {
               {sortedAppointments.length}
             </p>
           </div>
-          <div className="rounded-2xl border border-slate-200 bg-white/80 p-4 shadow-sm backdrop-blur-sm">
+          <div className="glass-card rounded-2xl p-6 border border-white/60 bg-white/70 backdrop-blur-md">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
               Confirmed
             </p>
@@ -236,7 +236,7 @@ export default function DoctorDashboard() {
               }
             </p>
           </div>
-          <div className="rounded-2xl border border-slate-200 bg-white/80 p-4 shadow-sm backdrop-blur-sm">
+          <div className="glass-card rounded-2xl p-6 border border-white/60 bg-white/70 backdrop-blur-md">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
               Completed
             </p>
@@ -303,7 +303,7 @@ export default function DoctorDashboard() {
               {sortedAppointments.map((appointment) => (
                 <article
                   key={appointment.id}
-                  className="grid gap-4 rounded-2xl border border-slate-200 bg-white/85 p-5 shadow-sm backdrop-blur-sm md:grid-cols-[9rem_1fr_auto] md:items-center"
+                  className="glass-card grid gap-4 rounded-2xl border border-white/60 bg-white/70 p-5 backdrop-blur-md shadow-sm md:grid-cols-[9rem_1fr_auto] md:items-center transition-all hover:shadow-md hover:bg-white/80"
                 >
                   <div className="flex items-center gap-2 font-semibold text-slate-900">
                     <Clock3 className="h-4 w-4 text-secondary-600" />
