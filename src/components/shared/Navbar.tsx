@@ -61,7 +61,7 @@ export default function Navbar({ user }: { user?: SafeUser | null }) {
           <div className="w-px h-4 bg-slate-300 mx-2 hidden lg:block"></div>
           
           <Link 
-            href="/login" 
+            href="/admin" 
             className="hover:text-secondary-700 transition-colors drop-shadow-sm font-bold text-secondary-600"
           >
             For Providers
