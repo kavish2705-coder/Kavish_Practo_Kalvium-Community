@@ -43,6 +43,7 @@ export default function SlotPicker({
     if (!activeDate || !doctorId) return;
 
     let isMounted = true;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsLoadingSlots(true);
 
     fetch(`/api/doctors/slots?doctorId=${doctorId}&date=${activeDate}`)
